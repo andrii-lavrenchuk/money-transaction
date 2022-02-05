@@ -9,7 +9,7 @@ import HomeView from "./components/views/HomeView";
 import RegisterView from "./components/views/RegisterView";
 import LoginView from "./components/views/LoginView";
 import NotFoundView from "./components/views/NotFoundView";
-
+import User from "./components/views/User";
 // styles
 import "./App.scss";
 
@@ -22,11 +22,15 @@ function App() {
         <Route path="/" exact>
           <HomeView />
         </Route>
-        <Route path="/register" exact>
+        <Route path="/register">
           <RegisterView />
         </Route>
-        <Route path="/login" exact>
+        <Route path="/login">
           <LoginView />
+        </Route>
+
+        <Route path="/user-menu">
+          <User />
         </Route>
         <Route>
           <NotFoundView />

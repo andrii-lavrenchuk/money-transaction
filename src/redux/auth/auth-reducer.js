@@ -16,16 +16,19 @@ const user = createReducer(initialState, {
     email: payload.user.email,
     id: payload.user.id,
   }),
+  [authActions.logoutSuccess]: () => initialState,
 });
 
 const token = createReducer(null, {
   [authActions.registerSuccess]: (_, { payload }) => payload.access_token,
   [authActions.loginSuccess]: (_, { payload }) => payload.access_token,
+  [authActions.logoutSuccess]: () => null,
 });
 
 const error = createReducer(null, {
   [authActions.registerError]: (_, { paylaod }) => paylaod,
   [authActions.loginError]: (_, { paylaod }) => paylaod,
+  [authActions.logoutError]: (_, { paylaod }) => paylaod,
 });
 
 // const loading = createReducer(null, {});

@@ -1,17 +1,26 @@
+import { NavLink } from "react-router-dom";
 import styles from "./UserMenu.module.scss";
 
 const UserMenu = () => {
   return (
     <div className={styles.container}>
       {/* <img src={avatar} alt="" width="32" className={s.avatar} /> */}
-      <span className={styles.name}>Welcome, User</span>
+      {/* <span className={styles.name}>Welcome, User</span> */}
 
-      <button
+      {/* <button
         type="button"
         //   onClick={() => dispatch(authOperations.logOut())}
       >
         Sign out
-      </button>
+      </button> */}
+
+      <NavLink
+        to="/user-menu"
+        // className={styles.link}
+        // activeClassName={styles.activeLink}
+      >
+        User menu
+      </NavLink>
     </div>
   );
 };
