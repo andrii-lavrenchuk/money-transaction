@@ -3,7 +3,6 @@ const usersReducerInitialState = {
     id: null,
     firstName: "",
     lastName: "",
-    isLoggedIn: false,
   },
 
   allUsers: {

@@ -1,8 +1,14 @@
 import { Switch, Route } from "react-router-dom";
+import { Component } from "react";
+import { connect } from "react-redux";
 
 // components
 import Container from "./components/Container";
 import AppBar from "./components/AppBar";
+
+// operations
+
+import { authOperations } from "./redux/auth";
 
 // views
 import HomeView from "./components/views/HomeView";
@@ -13,31 +19,41 @@ import User from "./components/views/User";
 // styles
 import "./App.scss";
 
-function App() {
-  return (
-    <Container>
-      <AppBar />
+class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
 
-      <Switch>
-        <Route path="/" exact>
-          <HomeView />
-        </Route>
-        <Route path="/register">
-          <RegisterView />
-        </Route>
-        <Route path="/login">
-          <LoginView />
-        </Route>
+  render() {
+    return (
+      <Container>
+        <AppBar />
 
-        <Route path="/user-menu">
-          <User />
-        </Route>
-        <Route>
-          <NotFoundView />
-        </Route>
-      </Switch>
-    </Container>
-  );
+        <Switch>
+          <Route path="/" exact>
+            <HomeView />
+          </Route>
+          <Route path="/register">
+            <RegisterView />
+          </Route>
+          <Route path="/login">
+            <LoginView />
+          </Route>
+
+          <Route path="/user-menu">
+            <User />
+          </Route>
+          <Route>
+            <NotFoundView />
+          </Route>
+        </Switch>
+      </Container>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);

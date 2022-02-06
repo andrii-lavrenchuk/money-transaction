@@ -17,6 +17,10 @@ const user = createReducer(initialState, {
     id: payload.user.id,
   }),
   [authActions.logoutSuccess]: () => initialState,
+  [authActions.getCurrentUserSuccess]: (_, { payload }) => ({
+    email: payload.email,
+    id: payload.id,
+  }),
 });
 
 const token = createReducer(null, {
@@ -29,6 +33,7 @@ const error = createReducer(null, {
   [authActions.registerError]: (_, { paylaod }) => paylaod,
   [authActions.loginError]: (_, { paylaod }) => paylaod,
   [authActions.logoutError]: (_, { paylaod }) => paylaod,
+  [authActions.getCurrentUserError]: (_, { paylaod }) => paylaod,
 });
 
 // const loading = createReducer(null, {});
