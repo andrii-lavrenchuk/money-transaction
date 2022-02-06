@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 // components
 import Container from "./components/Container";
 import AppBar from "./components/AppBar";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 
 // operations
 
@@ -33,16 +35,16 @@ class App extends Component {
           <Route path="/" exact>
             <HomeView />
           </Route>
-          <Route path="/register">
+          <PublicRoute restricted path="/register">
             <RegisterView />
-          </Route>
-          <Route path="/login">
+          </PublicRoute>
+          <PublicRoute restricted path="/login">
             <LoginView />
-          </Route>
+          </PublicRoute>
 
-          <Route path="/user-menu">
+          <PrivateRoute path="/user-menu">
             <User />
-          </Route>
+          </PrivateRoute>
           <Route>
             <NotFoundView />
           </Route>
