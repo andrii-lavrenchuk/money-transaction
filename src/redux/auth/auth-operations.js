@@ -1,5 +1,5 @@
 import axios from "axios";
-import authActions from "./auth-actions.js";
+import authActions from "./auth-actions";
 
 axios.defaults.baseURL = "https://lassognchwmnevcbvdwb.supabase.co";
 
@@ -67,6 +67,8 @@ const logOut = () => async (dispatch) => {
     token.unset();
 
     dispatch(authActions.logoutSuccess());
+
+    localStorage.removeItem("userId");
   } catch (error) {
     dispatch(authActions.logoutError(error));
   }
@@ -89,8 +91,6 @@ const getCurrentUser = () => async (dispatch, getState) => {
     const response = await axios.get("/auth/v1/user", {
       headers,
     });
-
-    console.log(response.data);
 
     dispatch(authActions.getCurrentUserSuccess(response.data));
   } catch (error) {

@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import { Component } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { lazy, Suspense } from "react";
 
@@ -12,6 +12,7 @@ import PublicRoute from "./components/PublicRoute";
 // operations
 
 import { authOperations } from "./redux/auth";
+import { usersOperations } from "./redux/users";
 
 // styles
 import "./App.scss";
@@ -45,43 +46,46 @@ const NotFoundView = lazy(
     ) /* webpackChunkName: "not-found-view" */
 );
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
+const App = ({ onGetCurrentUser, getCurrentUserProfile }) => {
+  useEffect(() => {
+    onGetCurrentUser();
+  }, [onGetCurrentUser]);
 
-  render() {
-    return (
-      <Container>
-        <AppBar />
+  useEffect(() => {
+    getCurrentUserProfile();
+  }, [getCurrentUserProfile]);
 
-        <Suspense fallback={<p>LOADING...</p>}>
-          <Switch>
-            <Route path="/" exact>
-              <HomeView />
-            </Route>
-            <PublicRoute restricted path="/register">
-              <RegisterView />
-            </PublicRoute>
-            <PublicRoute restricted path="/login">
-              <LoginView />
-            </PublicRoute>
+  return (
+    <Container>
+      <AppBar />
 
-            <PrivateRoute path="/user-menu">
-              <User />
-            </PrivateRoute>
-            <Route>
-              <NotFoundView />
-            </Route>
-          </Switch>
-        </Suspense>
-      </Container>
-    );
-  }
-}
+      <Suspense fallback={<p>LOADING...</p>}>
+        <Switch>
+          <Route path="/" exact>
+            <HomeView />
+          </Route>
+          <PublicRoute restricted path="/register">
+            <RegisterView />
+          </PublicRoute>
+          <PublicRoute restricted path="/login">
+            <LoginView />
+          </PublicRoute>
+
+          <PrivateRoute path="/user-menu">
+            <User />
+          </PrivateRoute>
+          <Route>
+            <NotFoundView />
+          </Route>
+        </Switch>
+      </Suspense>
+    </Container>
+  );
+};
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
+  getCurrentUserProfile: usersOperations.getCurrentProfile,
 };
 
 export default connect(null, mapDispatchToProps)(App);

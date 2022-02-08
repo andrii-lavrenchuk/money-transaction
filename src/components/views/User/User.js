@@ -1,57 +1,24 @@
 import { connect } from "react-redux";
+
 import { authOperations } from "../../../redux/auth";
 
-const User = ({ firstName, lastName, onLogout }) => {
+import CreateUserProfile from "./CreateUserProfile";
+import UpdateUserProfile from "./UpdateUserProfile";
+
+const User = ({ onLogout, currentUserId }) => {
   return (
-    <div>
-      {firstName ? (
-        <>
-          <h2>
-            Welcome {firstName} {lastName}
-          </h2>
-
-          <h2>Change your profile</h2>
-          <form>
-            <label>
-              First Name
-              <input type="text" />
-            </label>
-
-            <label>
-              Last Name
-              <input type="text" />
-            </label>
-            <button type="submit">Change</button>
-          </form>
-        </>
-      ) : (
-        <>
-          <h2>Please, create your profile</h2>
-          <form>
-            <label>
-              First Name
-              <input type="text" />
-            </label>
-
-            <label>
-              Last Name
-              <input type="text" />
-            </label>
-            <button type="submit">Create</button>
-          </form>
-        </>
-      )}
+    <>
+      {!currentUserId ? <CreateUserProfile /> : <UpdateUserProfile />}
 
       <button type="button" onClick={onLogout}>
         Logout
       </button>
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  firstName: state.users.currentUser.firstName,
-  lastName: state.users.currentUser.lastName,
+  currentUserId: state.users.currentUser.id,
 });
 
 const mapDispatchToProps = {
