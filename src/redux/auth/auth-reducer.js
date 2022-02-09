@@ -26,10 +26,10 @@ const token = createReducer(null, {
 });
 
 const error = createReducer(null, {
-  [authActions.registerError]: (_, { paylaod }) => paylaod,
-  [authActions.loginError]: (_, { paylaod }) => paylaod,
-  [authActions.logoutError]: (_, { paylaod }) => paylaod,
-  [authActions.getCurrentUserError]: (_, { paylaod }) => paylaod,
+  [authActions.registerError]: (_, { payload }) => payload,
+  [authActions.loginError]: (_, { payload }) => payload,
+  [authActions.logoutError]: (_, { payload }) => payload,
+  [authActions.getCurrentUserError]: (_, { payload }) => payload,
 });
 
 const isAuthenticated = createReducer(false, {

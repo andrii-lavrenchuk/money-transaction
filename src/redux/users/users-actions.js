@@ -4,6 +4,10 @@ const createUserProfileRequest = createAction("users/createUserProfileRequest");
 const createUserProfileSuccess = createAction("users/createUserProfileSuccess");
 const createUserProfileError = createAction("users/createUserProfileError");
 
+const updateUserProfileRequest = createAction("users/updateUserProfileRequest");
+const updateUserProfileSuccess = createAction("users/updateUserProfileSuccess");
+const updateUserProfileError = createAction("users/updateUserProfileError");
+
 const getCurrentUserProfileRequest = createAction(
   "users/getCurrentUserProfileRequest"
 );
@@ -18,6 +22,11 @@ const usersActions = {
   createUserProfileRequest,
   createUserProfileSuccess,
   createUserProfileError,
+
+  updateUserProfileRequest,
+  updateUserProfileSuccess,
+  updateUserProfileError,
+
   getCurrentUserProfileRequest,
   getCurrentUserProfileSuccess,
   getCurrentUserProfileError,

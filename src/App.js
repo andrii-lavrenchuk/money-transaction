@@ -54,7 +54,7 @@ const App = ({ onGetCurrentUser }) => {
     <Container>
       <AppBar />
 
-      <Suspense fallback={<p>LOADING...</p>}>
+      <Suspense fallback={<p>LOADING from APP...</p>}>
         <Switch>
           <Route path="/" exact>
             <HomeView />

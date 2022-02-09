@@ -31,7 +31,7 @@ const register = (credentials) => async (dispatch) => {
 
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.registerError(error));
+    dispatch(authActions.registerError(error.message));
   }
 };
 
@@ -51,7 +51,7 @@ const login = (credentials) => async (dispatch) => {
 
     dispatch(authActions.loginSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.loginError(error));
+    dispatch(authActions.loginError(error.message));
   }
 };
 
@@ -67,7 +67,7 @@ const logOut = () => async (dispatch) => {
 
     dispatch(authActions.logoutSuccess());
   } catch (error) {
-    dispatch(authActions.logoutError(error));
+    dispatch(authActions.logoutError(error.message));
   }
 };
 
@@ -82,7 +82,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
   token.set(persistedToken);
 
-  dispatch(authActions.getCurrentUserRequest);
+  dispatch(authActions.getCurrentUserRequest());
 
   try {
     const response = await axios.get("/auth/v1/user", {
@@ -91,7 +91,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
     dispatch(authActions.getCurrentUserSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.getCurrentUserError(error));
+    dispatch(authActions.getCurrentUserError(error.message));
   }
 };
 

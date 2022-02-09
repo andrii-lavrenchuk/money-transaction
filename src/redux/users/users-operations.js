@@ -27,6 +27,32 @@ const createProfile = (params) => async (dispatch) => {
   }
 };
 
+const updateProfile = (params) => async (dispatch, getState) => {
+  const {
+    users: {
+      currentUser: { id },
+    },
+  } = getState();
+  dispatch(usersActions.updateUserProfileRequest());
+
+  try {
+    const response = await axios.patch(
+      `/rest/v1/profile?user=eq.${id}`,
+      params,
+      {
+        headers: {
+          ...headers,
+          Prefer: "return=representation",
+        },
+      }
+    );
+
+    dispatch(usersActions.updateUserProfileSuccess(response.data));
+  } catch (error) {
+    dispatch(usersActions.updateUserProfileError(error));
+  }
+};
+
 const getCurrentProfile = () => async (dispatch, getState) => {
   const {
     auth: { id: persistedId },
@@ -53,5 +79,6 @@ const getCurrentProfile = () => async (dispatch, getState) => {
 
 export default {
   createProfile,
+  updateProfile,
   getCurrentProfile,
 };

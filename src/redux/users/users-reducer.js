@@ -13,14 +13,19 @@ const currentUserInitialState = {
 };
 
 const currentUser = createReducer(currentUserInitialState, {
-  [usersActions.createUserProfileSuccess]: (_, { payload }) => {
-    return {
-      email: payload[0].email,
-      id: payload[0].id,
-      firstName: payload[0].firstName,
-      lastName: payload[0].lastName,
-    };
-  },
+  [usersActions.createUserProfileSuccess]: (_, { payload }) => ({
+    email: payload[0].email,
+    id: payload[0].id,
+    firstName: payload[0].firstName,
+    lastName: payload[0].lastName,
+  }),
+
+  [usersActions.updateUserProfileSuccess]: (_, { payload }) => ({
+    email: payload[0].email,
+    id: payload[0].user,
+    firstName: payload[0].firstName,
+    lastName: payload[0].lastName,
+  }),
 
   [usersActions.getCurrentUserProfileSuccess]: (_, { payload }) => {
     if (payload.length === 0) {
