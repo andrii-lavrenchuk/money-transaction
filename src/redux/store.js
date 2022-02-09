@@ -17,7 +17,7 @@ import usersReducer from "./users/users-reducer";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "id"],
 };
 
 const store = configureStore({

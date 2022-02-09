@@ -4,7 +4,7 @@ import { authSelectors } from "../redux/auth";
 
 export default function PrivateRoute({
   children,
-  redirectTo = "/login",
+  redirectTo,
   ...routeProps
 }) {
   const isLoggedIn = useSelector(authSelectors.getIsAuthenticated);

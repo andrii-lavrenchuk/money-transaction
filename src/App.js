@@ -12,7 +12,6 @@ import PublicRoute from "./components/PublicRoute";
 // operations
 
 import { authOperations } from "./redux/auth";
-import { usersOperations } from "./redux/users";
 
 // styles
 import "./App.scss";
@@ -46,14 +45,10 @@ const NotFoundView = lazy(
     ) /* webpackChunkName: "not-found-view" */
 );
 
-const App = ({ onGetCurrentUser, getCurrentUserProfile }) => {
+const App = ({ onGetCurrentUser }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
-
-  useEffect(() => {
-    getCurrentUserProfile();
-  }, [getCurrentUserProfile]);
 
   return (
     <Container>
@@ -64,14 +59,14 @@ const App = ({ onGetCurrentUser, getCurrentUserProfile }) => {
           <Route path="/" exact>
             <HomeView />
           </Route>
-          <PublicRoute restricted path="/register">
+          <PublicRoute restricted path="/register" redirectTo="/user-menu">
             <RegisterView />
           </PublicRoute>
-          <PublicRoute restricted path="/login">
+          <PublicRoute restricted path="/login" redirectTo="/user-menu">
             <LoginView />
           </PublicRoute>
 
-          <PrivateRoute path="/user-menu">
+          <PrivateRoute path="/user-menu" redirectTo="/login">
             <User />
           </PrivateRoute>
           <Route>
@@ -85,7 +80,6 @@ const App = ({ onGetCurrentUser, getCurrentUserProfile }) => {
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
-  getCurrentUserProfile: usersOperations.getCurrentProfile,
 };
 
 export default connect(null, mapDispatchToProps)(App);

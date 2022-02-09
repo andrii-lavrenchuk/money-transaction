@@ -3,8 +3,7 @@ import usersActions from "./users-actions";
 
 axios.defaults.baseURL = "https://lassognchwmnevcbvdwb.supabase.co";
 
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNjQyNDA1NTEyLCJleHAiOjE5NTc5ODE1MTJ9.kyuoxEoLxxKrJGbNZSfibFbpFdEAN2T7cJgtJcsp26I";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const headers = {
   "Content-Type": "application/json",
@@ -17,8 +16,7 @@ const createProfile = (params) => async (dispatch) => {
   try {
     const response = await axios.post("/rest/v1/profile", params, {
       headers: {
-        "Content-Type": "application/json",
-        apikey: API_KEY,
+        ...headers,
         Prefer: "return=representation",
       },
     });
@@ -29,18 +27,23 @@ const createProfile = (params) => async (dispatch) => {
   }
 };
 
-const getCurrentProfile = () => async (dispatch) => {
-  const id = localStorage.getItem("userId");
+const getCurrentProfile = () => async (dispatch, getState) => {
+  const {
+    auth: { id: persistedId },
+  } = getState();
 
-  if (!id) {
+  if (!persistedId) {
     return;
   }
-  dispatch(usersActions.getCurrentUserProfileRequest);
+  dispatch(usersActions.getCurrentUserProfileRequest());
 
   try {
-    const response = await axios.get(`/rest/v1/profile?id=eq.${id}&select=*`, {
-      headers: { apikey: API_KEY },
-    });
+    const response = await axios.get(
+      `/rest/v1/profile?user=eq.${persistedId}&select=*`,
+      {
+        headers,
+      }
+    );
 
     dispatch(usersActions.getCurrentUserProfileSuccess(response.data));
   } catch (error) {

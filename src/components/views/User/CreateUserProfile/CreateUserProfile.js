@@ -54,8 +54,8 @@ const CreateUserProfile = ({ onCreateProfile, email, profileUserId }) => {
 };
 
 const mapStateToProps = (state) => ({
-  email: state.auth.user.email,
-  profileUserId: state.auth.user.id,
+  email: state.auth.email,
+  profileUserId: state.auth.id,
 });
 const mapDispatchToProps = {
   onCreateProfile: usersOperations.createProfile,

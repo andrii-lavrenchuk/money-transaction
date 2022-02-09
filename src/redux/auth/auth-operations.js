@@ -12,8 +12,7 @@ const token = {
   },
 };
 
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNjQyNDA1NTEyLCJleHAiOjE5NTc5ODE1MTJ9.kyuoxEoLxxKrJGbNZSfibFbpFdEAN2T7cJgtJcsp26I";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const headers = {
   "Content-Type": "application/json",
@@ -67,8 +66,6 @@ const logOut = () => async (dispatch) => {
     token.unset();
 
     dispatch(authActions.logoutSuccess());
-
-    localStorage.removeItem("userId");
   } catch (error) {
     dispatch(authActions.logoutError(error));
   }
