@@ -6,3 +6,22 @@
   margin-bottom: 30px;
   padding-bottom: 20px;
 }
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2a363b;
+}
+.activeLink {
+  composes: link;
+  color: green;
+}
+
+.link:first-child {
+  margin-left: 20px;
+}
+.link:not(:last-child) {
+  margin-right: 20px;
+}

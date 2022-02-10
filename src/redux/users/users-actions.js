@@ -18,6 +18,10 @@ const getCurrentUserProfileError = createAction(
   "users/getCurrentUserProfileError"
 );
 
+const searchContactRequest = createAction("users/searchContactRequest");
+const searchContactSuccess = createAction("users/searchContactSuccess");
+const searchContactError = createAction("users/searchContactError");
+
 const usersActions = {
   createUserProfileRequest,
   createUserProfileSuccess,
@@ -30,6 +34,10 @@ const usersActions = {
   getCurrentUserProfileRequest,
   getCurrentUserProfileSuccess,
   getCurrentUserProfileError,
+
+  searchContactRequest,
+  searchContactSuccess,
+  searchContactError,
 };
 
 export default usersActions;

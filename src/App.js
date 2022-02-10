@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { lazy, Suspense } from "react";
+import { ToastContainer } from "react-toastify";
 
 // components
 import Container from "./components/Container";
@@ -14,6 +15,7 @@ import PublicRoute from "./components/PublicRoute";
 import { authOperations } from "./redux/auth";
 
 // styles
+import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 
 // views
@@ -38,6 +40,20 @@ const User = lazy(
   () => import("./components/views/User") /* webpackChunkName: "user-view" */
 );
 
+const UserContactsView = lazy(
+  () =>
+    import(
+      "./components/views/UserContactsView"
+    ) /* webpackChunkName: "user-contacts-view" */
+);
+
+const UserTransactions = lazy(
+  () =>
+    import(
+      "./components/views/UserTransactions"
+    ) /* webpackChunkName: "user-transacrions-view" */
+);
+
 const NotFoundView = lazy(
   () =>
     import(
@@ -52,6 +68,7 @@ const App = ({ onGetCurrentUser }) => {
 
   return (
     <Container>
+      <ToastContainer autoClose={3000} />
       <AppBar />
 
       <Suspense fallback={<p>LOADING from APP...</p>}>
@@ -68,6 +85,13 @@ const App = ({ onGetCurrentUser }) => {
 
           <PrivateRoute path="/user-menu" redirectTo="/login">
             <User />
+          </PrivateRoute>
+          <PrivateRoute path="/user-contacts" redirectTo="/login">
+            <UserContactsView />
+          </PrivateRoute>
+
+          <PrivateRoute path="/user-transactions" redirectTo="/login">
+            <UserTransactions />
           </PrivateRoute>
           <Route>
             <NotFoundView />

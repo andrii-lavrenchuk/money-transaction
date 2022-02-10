@@ -77,8 +77,26 @@ const getCurrentProfile = () => async (dispatch, getState) => {
   }
 };
 
+const searchContact = (value) => async (dispatch) => {
+  dispatch(usersActions.searchContactRequest());
+
+  try {
+    const response = await axios.get(
+      `/rest/v1/profile?email=eq.${value}&select=*`,
+      {
+        headers,
+      }
+    );
+
+    dispatch(usersActions.searchContactSuccess(response.data));
+  } catch (error) {
+    dispatch(usersActions.searchContactError(error));
+  }
+};
+
 export default {
   createProfile,
   updateProfile,
   getCurrentProfile,
+  searchContact,
 };
