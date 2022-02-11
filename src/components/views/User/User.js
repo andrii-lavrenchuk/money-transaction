@@ -7,6 +7,8 @@ import { usersOperations } from "../../../redux/users";
 import CreateUserProfile from "./CreateUserProfile";
 import UpdateUserProfile from "./UpdateUserProfile";
 
+import { Button } from "reactstrap";
+
 const User = ({ onLogout, currentUserId, getCurrentUserProfile }) => {
   useEffect(() => {
     getCurrentUserProfile();
@@ -14,13 +16,12 @@ const User = ({ onLogout, currentUserId, getCurrentUserProfile }) => {
 
   return (
     <div>
-     {!currentUserId ? <CreateUserProfile /> : <UpdateUserProfile />}
+      {!currentUserId ? <CreateUserProfile /> : <UpdateUserProfile />}
 
-      <button type="button" onClick={onLogout}>
+      <Button className="mt-5" onClick={onLogout} color="danger" outline>
         Logout
-      </button>
+      </Button>
     </div>
-   
   );
 };
 

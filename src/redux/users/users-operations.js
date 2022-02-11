@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authActions } from "../auth";
 import usersActions from "./users-actions";
 
 axios.defaults.baseURL = "https://lassognchwmnevcbvdwb.supabase.co";
@@ -94,9 +95,81 @@ const searchContact = (value) => async (dispatch) => {
   }
 };
 
+const addContact = (params) => async (dispatch) => {
+  dispatch(usersActions.addContactRequest());
+
+  try {
+    const response = await axios.post("/rest/v1/contact", params, {
+      headers: {
+        ...headers,
+        Prefer: "return=representation",
+      },
+    });
+
+    dispatch(usersActions.addContactSuccess(response.data));
+  } catch (error) {
+    dispatch(usersActions.addContactError(error));
+  }
+};
+
+const getContactsList = () => async (dispatch, getState) => {
+  const {
+    users: { addedContact },
+  } = getState();
+
+  dispatch(usersActions.makeContactsListRequest());
+
+  try {
+    const response = await axios.get(
+      `/rest/v1/profile?select=*&user=in.(${addedContact.join()})`,
+      {
+        headers: {
+          ...headers,
+          Prefer: "return=representation",
+        },
+      }
+    );
+
+    dispatch(usersActions.makeContactsListSuccess(response.data));
+  } catch (error) {
+    dispatch(usersActions.makeContactsListError(error));
+  }
+};
+
+const getAddedContacts = () => async (dispatch, getState) => {
+  const {
+    auth: { id },
+  } = getState();
+
+  if (!id) {
+    return;
+  }
+
+  dispatch(usersActions.getAddedContactsRequest());
+
+  try {
+    const response = await axios.get(
+      `/rest/v1/contact?owner=eq.${id}&select=*`,
+      {
+        headers: {
+          ...headers,
+          Prefer: "return=representation",
+        },
+      }
+    );
+
+    dispatch(usersActions.getAddedContactsSuccess(response.data));
+  } catch (error) {
+    dispatch(usersActions.getAddedContactsError());
+  }
+};
+
 export default {
   createProfile,
   updateProfile,
   getCurrentProfile,
   searchContact,
+  addContact,
+  getAddedContacts,
+  getContactsList,
 };

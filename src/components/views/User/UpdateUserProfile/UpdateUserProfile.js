@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { Form, FormGroup, Input, Label, Button, Row, Col } from "reactstrap";
 
 import { usersOperations } from "../../../../redux/users";
 
@@ -35,40 +36,53 @@ const UpdateUserProfile = ({ firstName, lastName, email, onUpdateProfile }) => {
   return (
     <>
       <h2>
-        Hello,{firstName} {lastName}
+        Hello,{firstName} {lastName}.
       </h2>
-      <form onSubmit={onSubmit}>
-        <label>
-          First Name
-          <input
-            type="text"
-            name="newFirstName"
-            value={newFirstName}
-            onChange={handleInputChange}
-          />
-        </label>
+      <h2>Here you can update your profile</h2>
 
-        <label>
-          Last Name
-          <input
-            type="text"
-            name="newLastName"
-            value={newLastName}
-            onChange={handleInputChange}
-          />
-        </label>
+      <Form inline onSubmit={onSubmit}>
+        <Row className="justify-content-center mt-5">
+          <Col md={3}>
+            <FormGroup floating>
+              <Input
+                id="firstName"
+                value={newFirstName}
+                name="newFirstName"
+                placeholder="First Name"
+                type="text"
+                onChange={handleInputChange}
+              />
+              <Label for="firstName">First Name</Label>
+            </FormGroup>
+            <FormGroup floating>
+              <Input
+                id="lastName"
+                name="newLastName"
+                value={newLastName}
+                placeholder="Password"
+                type="text"
+                onChange={handleInputChange}
+              />
+              <Label for="lastName">Last Name</Label>
+            </FormGroup>
 
-        <label>
-          Email
-          <input
-            type="text"
-            name="newEmail"
-            value={newEmail}
-            onChange={handleInputChange}
-          />
-        </label>
-        <button type="submit">Update</button>
-      </form>
+            <FormGroup floating>
+              <Input
+                id="email"
+                name="newLastName"
+                value={newLastName}
+                placeholder="Password"
+                type="email"
+                onChange={handleInputChange}
+              />
+              <Label for="email">Email</Label>
+            </FormGroup>
+            <Button color="info" outline>
+              Create
+            </Button>
+          </Col>
+        </Row>
+      </Form>
     </>
   );
 };

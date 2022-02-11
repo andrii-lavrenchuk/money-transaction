@@ -4,21 +4,19 @@ import { authSelectors } from "../../redux/auth";
 import Navigation from "../Navigation/";
 import AuthNav from "../AuthNav";
 
+import { Navbar, NavbarBrand, NavItem } from "reactstrap";
+
 import styles from "./AppBar.module.scss";
 import { NavLink } from "react-router-dom";
 
 const AppBar = ({ isAuthenticated }) => (
-  <header className={styles.header}>
-    <NavLink
-      to="/"
-      exact
-      className={styles.link}
-      activeClassName={styles.activeLink}
-    >
+  <Navbar color="info" expand="md" light>
+    <NavLink to="/" exact>
       Home
     </NavLink>
+
     {isAuthenticated ? <Navigation /> : <AuthNav />}
-  </header>
+  </Navbar>
 );
 
 const mapStateToProps = (state) => ({

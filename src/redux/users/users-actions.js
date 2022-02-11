@@ -22,6 +22,18 @@ const searchContactRequest = createAction("users/searchContactRequest");
 const searchContactSuccess = createAction("users/searchContactSuccess");
 const searchContactError = createAction("users/searchContactError");
 
+const addContactRequest = createAction("users/addContactRequest");
+const addContactSuccess = createAction("users/addContactSuccess");
+const addContactError = createAction("users/addContactError");
+
+const getAddedContactsRequest = createAction("users/getAddedContactsRequest");
+const getAddedContactsSuccess = createAction("users/getAddedContactsSuccess");
+const getAddedContactsError = createAction("users/getAddedContactsError");
+
+const makeContactsListRequest = createAction("users/makeContactsListRequest");
+const makeContactsListSuccess = createAction("users/makeContactsListSuccess");
+const makeContactsListError = createAction("users/makeContactsListError");
+
 const usersActions = {
   createUserProfileRequest,
   createUserProfileSuccess,
@@ -38,6 +50,18 @@ const usersActions = {
   searchContactRequest,
   searchContactSuccess,
   searchContactError,
+
+  addContactRequest,
+  addContactSuccess,
+  addContactError,
+
+  getAddedContactsRequest,
+  getAddedContactsSuccess,
+  getAddedContactsError,
+
+  makeContactsListRequest,
+  makeContactsListSuccess,
+  makeContactsListError,
 };
 
 export default usersActions;

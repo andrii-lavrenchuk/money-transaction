@@ -5,6 +5,8 @@ import { lazy, Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
 // components
+import { Spinner } from "reactstrap";
+
 import Container from "./components/Container";
 import AppBar from "./components/AppBar";
 import PrivateRoute from "./components/PrivateRoute";
@@ -13,9 +15,11 @@ import PublicRoute from "./components/PublicRoute";
 // operations
 
 import { authOperations } from "./redux/auth";
+import { usersOperations } from "./redux/users";
 
 // styles
 import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
 // views
@@ -61,17 +65,21 @@ const NotFoundView = lazy(
     ) /* webpackChunkName: "not-found-view" */
 );
 
-const App = ({ onGetCurrentUser }) => {
+const App = ({ onGetCurrentUser, getAddedContacts, makeContactsList }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
+
+  useEffect(() => {
+    getAddedContacts();
+  }, [getAddedContacts]);
 
   return (
     <Container>
       <ToastContainer autoClose={3000} />
       <AppBar />
 
-      <Suspense fallback={<p>LOADING from APP...</p>}>
+      <Suspense fallback={<Spinner />}>
         <Switch>
           <Route path="/" exact>
             <HomeView />
@@ -104,6 +112,8 @@ const App = ({ onGetCurrentUser }) => {
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
+  getAddedContacts: usersOperations.getAddedContacts,
+  makeContactsList: usersOperations.getContactsList,
 };
 
 export default connect(null, mapDispatchToProps)(App);

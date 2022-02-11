@@ -51,10 +51,12 @@ const currentUser = createReducer(currentUserInitialState, {
   [authActions.logoutSuccess]: () => currentUserInitialState,
 });
 
-const contactsList = createReducer(contactsListInitialState, {
+const contactsFound = createReducer(contactsListInitialState, {
   [usersActions.searchContactSuccess]: (_, { payload }) => {
     if (payload.length === 0) {
-      toast.error("Contact not found or incorrect email entered");
+      toast.error(
+        "Contact not found or incorrect email entered. Please, try again"
+      );
       return contactsListInitialState;
     }
 
@@ -65,8 +67,39 @@ const contactsList = createReducer(contactsListInitialState, {
       lastName: payload[0].lastName,
     };
   },
+  [usersActions.addContactSuccess]: () => contactsListInitialState,
 });
 
-const currentUserReducer = combineReducers({ currentUser, contactsList });
+const addedContact = createReducer([], {
+  [usersActions.addContactSuccess]: (state, { payload }) => [
+    ...state,
+    payload[0].contact,
+  ],
+
+  [usersActions.getAddedContactsSuccess]: (_, { payload }) => {
+    const addedContactsArray = [...payload];
+
+    const arrOfContactsId = [];
+
+    addedContactsArray.forEach((contact) => {
+      const id = contact.contact;
+
+      arrOfContactsId.push(id);
+    });
+
+    return [...arrOfContactsId];
+  },
+});
+
+const contactsList = createReducer([], {
+  [usersActions.makeContactsListSuccess]: (_, { payload }) => payload,
+});
+
+const currentUserReducer = combineReducers({
+  currentUser,
+  contactsFound,
+  contactsList,
+  addedContact,
+});
 
 export default currentUserReducer;
