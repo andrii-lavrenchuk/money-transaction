@@ -117,6 +117,9 @@ const getContactsList = () => async (dispatch, getState) => {
     users: { addedContact },
   } = getState();
 
+  if (addedContact.length === 0) {
+    return;
+  }
   dispatch(usersActions.makeContactsListRequest());
 
   try {
@@ -136,15 +139,30 @@ const getContactsList = () => async (dispatch, getState) => {
   }
 };
 
+const deleteContact = (id) => async (dispatc) => {
+  dispatc(usersActions.deleteContactRequest());
+
+  try {
+    await axios.delete(`/rest/v1/contact?contact=eq.${id}`, { headers });
+
+    dispatc(usersActions.deleteContactSuccess(id));
+  } catch (error) {
+    dispatc(usersActions.deleteContactError);
+  }
+};
+
 const getAddedContacts = () => async (dispatch, getState) => {
   const {
     auth: { id },
   } = getState();
 
+  const {
+    users: { addedContact },
+  } = getState();
+
   if (!id) {
     return;
   }
-
   dispatch(usersActions.getAddedContactsRequest());
 
   try {
@@ -172,4 +190,5 @@ export default {
   addContact,
   getAddedContacts,
   getContactsList,
+  deleteContact,
 };

@@ -1,4 +1,6 @@
 import { connect } from "react-redux";
+import { useEffect } from "react";
+
 import ContactSearch from "../ContactsSearch";
 
 import {
@@ -11,8 +13,20 @@ import {
   Button,
   Spinner,
 } from "reactstrap";
+import { usersOperations } from "../../redux/users";
 
-const ContactsList = ({ contactsList }) => {
+const ContactsList = ({
+  contactsList,
+  onDeleteContact,
+  getContactsList,
+  addedContact,
+}) => {
+  useEffect(() => {
+    getContactsList();
+
+    console.log("getContactsList");
+  }, [addedContact]);
+
   return false ? (
     <Spinner color="info" size=""></Spinner>
   ) : (
@@ -28,7 +42,11 @@ const ContactsList = ({ contactsList }) => {
             ) : (
               <ListGroup>
                 {contactsList.map((contact) => (
-                  <ListGroupItem color="info" key={contact.id}>
+                  <ListGroupItem
+                    className="mt-2 mb-3"
+                    color="info"
+                    key={contact.id}
+                  >
                     <ListGroupItemHeading>
                       {contact.firstName}
                     </ListGroupItemHeading>
@@ -36,7 +54,11 @@ const ContactsList = ({ contactsList }) => {
                       {contact.lastName}
                     </ListGroupItemHeading>
                     <ListGroupItemText>{contact.email}</ListGroupItemText>
-                    <Button color="danger" outline>
+                    <Button
+                      onClick={() => onDeleteContact(contact.user)}
+                      color="danger"
+                      outline
+                    >
                       Delete
                     </Button>
                   </ListGroupItem>
@@ -52,6 +74,12 @@ const ContactsList = ({ contactsList }) => {
 
 const mapStateToProps = (state) => ({
   contactsList: state.users.contactsList,
+  addedContact: state.users.addedContact,
 });
 
-export default connect(mapStateToProps, null)(ContactsList);
+const mapDispatchToProps = {
+  onDeleteContact: usersOperations.deleteContact,
+  getContactsList: usersOperations.getContactsList,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);

@@ -89,10 +89,14 @@ const addedContact = createReducer([], {
 
     return [...arrOfContactsId];
   },
+
+  [usersActions.deleteContactSuccess]: () => [],
 });
 
 const contactsList = createReducer([], {
   [usersActions.makeContactsListSuccess]: (_, { payload }) => payload,
+  [usersActions.deleteContactSuccess]: (state, { payload }) =>
+    state.filter(({ user }) => user !== payload),
 });
 
 const currentUserReducer = combineReducers({

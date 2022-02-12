@@ -28,7 +28,7 @@ const UpdateUserProfile = ({ firstName, lastName, email, onUpdateProfile }) => {
 
     onUpdateProfile({
       firstName: newFirstName,
-      lastName: newLastName,
+      lastName: firstName,
       email: newEmail,
     });
   };
@@ -69,8 +69,8 @@ const UpdateUserProfile = ({ firstName, lastName, email, onUpdateProfile }) => {
             <FormGroup floating>
               <Input
                 id="email"
-                name="newLastName"
-                value={newLastName}
+                name="newEmail"
+                value={newEmail}
                 placeholder="Password"
                 type="email"
                 onChange={handleInputChange}
@@ -78,7 +78,7 @@ const UpdateUserProfile = ({ firstName, lastName, email, onUpdateProfile }) => {
               <Label for="email">Email</Label>
             </FormGroup>
             <Button color="info" outline>
-              Create
+              Update
             </Button>
           </Col>
         </Row>

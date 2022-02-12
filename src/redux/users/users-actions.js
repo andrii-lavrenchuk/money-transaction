@@ -34,6 +34,10 @@ const makeContactsListRequest = createAction("users/makeContactsListRequest");
 const makeContactsListSuccess = createAction("users/makeContactsListSuccess");
 const makeContactsListError = createAction("users/makeContactsListError");
 
+const deleteContactRequest = createAction("users/deleteContactRequest");
+const deleteContactSuccess = createAction("users/deleteContactSuccess");
+const deleteContactError = createAction("users/deleteContactError");
+
 const usersActions = {
   createUserProfileRequest,
   createUserProfileSuccess,
@@ -62,6 +66,10 @@ const usersActions = {
   makeContactsListRequest,
   makeContactsListSuccess,
   makeContactsListError,
+
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
 };
 
 export default usersActions;

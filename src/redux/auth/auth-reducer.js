@@ -42,12 +42,19 @@ const isAuthenticated = createReducer(false, {
   [authActions.logoutSuccess]: () => false,
 });
 
+const isFetchingCurrentUser = createReducer(false, {
+  [authActions.getCurrentUserRequest]: () => true,
+  [authActions.getCurrentUserSuccess]: () => false,
+  [authActions.getCurrentUserError]: () => false,
+});
+
 const authReducer = combineReducers({
   id,
   email,
   token,
   error,
   isAuthenticated,
+  isFetchingCurrentUser,
 });
 
 export default authReducer;

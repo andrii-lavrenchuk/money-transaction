@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { usersOperations } from "../../redux/users";
@@ -20,18 +20,8 @@ const ContactSearch = ({
   contactsFound,
   addContact,
   userId,
-  getAddedContacts,
-  getContactsList,
 }) => {
   const [value, setValue] = useState("");
-
-  useEffect(() => {
-    getAddedContacts();
-  }, [getAddedContacts]);
-
-  useEffect(() => {
-    getContactsList();
-  }, [contactsFound]);
 
   const onSearch = () => {
     if (value.trim() === "") {
@@ -106,8 +96,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   contactSearch: usersOperations.searchContact,
   addContact: usersOperations.addContact,
-  getAddedContacts: usersOperations.getAddedContacts,
-  getContactsList: usersOperations.getContactsList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactSearch);

@@ -65,7 +65,7 @@ const NotFoundView = lazy(
     ) /* webpackChunkName: "not-found-view" */
 );
 
-const App = ({ onGetCurrentUser, getAddedContacts, makeContactsList }) => {
+const App = ({ onGetCurrentUser, getAddedContacts, isFetchingCurrentUser }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
@@ -74,12 +74,16 @@ const App = ({ onGetCurrentUser, getAddedContacts, makeContactsList }) => {
     getAddedContacts();
   }, [getAddedContacts]);
 
-  return (
+  return isFetchingCurrentUser ? (
+    <div className="spinner-container">
+      <Spinner color="info" />
+    </div>
+  ) : (
     <Container>
       <ToastContainer autoClose={3000} />
       <AppBar />
 
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={null}>
         <Switch>
           <Route path="/" exact>
             <HomeView />
@@ -110,10 +114,13 @@ const App = ({ onGetCurrentUser, getAddedContacts, makeContactsList }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isFetchingCurrentUser: state.auth.isFetchingCurrentUser,
+});
+
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
   getAddedContacts: usersOperations.getAddedContacts,
-  makeContactsList: usersOperations.getContactsList,
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
