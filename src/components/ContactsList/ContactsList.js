@@ -2,29 +2,14 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 
 import ContactSearch from "../ContactsSearch";
+import Contact from "../Contact";
 
-import {
-  ListGroup,
-  ListGroupItem,
-  ListGroupItemHeading,
-  ListGroupItemText,
-  Row,
-  Col,
-  Button,
-  Spinner,
-} from "reactstrap";
+import { ListGroup, ListGroupItem, Row, Col, Spinner } from "reactstrap";
 import { usersOperations } from "../../redux/users";
 
-const ContactsList = ({
-  contactsList,
-  onDeleteContact,
-  getContactsList,
-  addedContact,
-}) => {
+const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
   useEffect(() => {
     getContactsList();
-
-    console.log("getContactsList");
   }, [addedContact]);
 
   return false ? (
@@ -47,20 +32,12 @@ const ContactsList = ({
                     color="info"
                     key={contact.id}
                   >
-                    <ListGroupItemHeading>
-                      {contact.firstName}
-                    </ListGroupItemHeading>
-                    <ListGroupItemHeading>
-                      {contact.lastName}
-                    </ListGroupItemHeading>
-                    <ListGroupItemText>{contact.email}</ListGroupItemText>
-                    <Button
-                      onClick={() => onDeleteContact(contact.user)}
-                      color="danger"
-                      outline
-                    >
-                      Delete
-                    </Button>
+                    <Contact
+                      firstName={contact.firstName}
+                      lastName={contact.lastname}
+                      email={contact.email}
+                      user={contact.user}
+                    />
                   </ListGroupItem>
                 ))}
               </ListGroup>
@@ -78,7 +55,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onDeleteContact: usersOperations.deleteContact,
   getContactsList: usersOperations.getContactsList,
 };
 

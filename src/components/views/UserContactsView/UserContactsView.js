@@ -1,16 +1,6 @@
-import { useEffect } from "react";
-import { connect } from "react-redux";
-import { usersOperations } from "../../../redux/users";
-
 import ContactsList from "../../ContactsList";
 
-const UserContactsView = ({ getContactsList, addedContact }) => {
-  // useEffect(() => {
-  //   getContactsList();
-
-  //   console.log("getContactsList");
-  // }, [addedContact]);
-
+const UserContactsView = () => {
   return (
     <>
       <h2>User Contacts View</h2>
@@ -18,12 +8,5 @@ const UserContactsView = ({ getContactsList, addedContact }) => {
     </>
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   addedContact: state.users.addedContact,
-// });
-// const mapDispatchToProps = {
-//   getContactsList: usersOperations.getContactsList,
-// };
 
 export default UserContactsView;
