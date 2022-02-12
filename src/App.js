@@ -72,14 +72,10 @@ const ContactProfileView = lazy(
     ) /* webpackChunkName: "contact-profile-view" */
 );
 
-const App = ({ onGetCurrentUser, getAddedContacts, isFetchingCurrentUser }) => {
+const App = ({ onGetCurrentUser, isFetchingCurrentUser }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
-
-  // useEffect(() => {
-  //   getAddedContacts();
-  // }, [getAddedContacts]);
 
   return isFetchingCurrentUser ? (
     <div className="spinner-container">

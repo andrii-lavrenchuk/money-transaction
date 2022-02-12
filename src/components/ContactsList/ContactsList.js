@@ -6,8 +6,12 @@ import Contact from "../Contact";
 
 import { ListGroup, ListGroupItem, Row, Col, Spinner } from "reactstrap";
 import { usersOperations } from "../../redux/users";
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
 const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
+  const location = useLocation();
+  const { url } = useRouteMatch();
+
   useEffect(() => {
     getContactsList();
   }, [addedContact]);
@@ -32,12 +36,18 @@ const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
                     color="info"
                     key={contact.id}
                   >
-                    <Contact
-                      firstName={contact.firstName}
-                      lastName={contact.lastname}
-                      email={contact.email}
-                      user={contact.user}
-                    />
+                    <Link
+                      className="d-block"
+                      to={{
+                        pathname: `${url}/${contact.user}`,
+                        state: { from: location },
+                      }}
+                    >
+                      <Contact
+                        firstName={contact.firstName}
+                        lastName={contact.lastName}
+                      />
+                    </Link>
                   </ListGroupItem>
                 ))}
               </ListGroup>
