@@ -72,12 +72,19 @@ const ContactProfileView = lazy(
     ) /* webpackChunkName: "contact-profile-view" */
 );
 
-const App = ({ onGetCurrentUser, isFetchingCurrentUser }) => {
+const AllUsersView = lazy(
+  () =>
+    import(
+      "./components/views/AllUsersView"
+    ) /* webpackChunkName: "users-view" */
+);
+
+const App = ({ onGetCurrentUser, isLoading }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
 
-  return isFetchingCurrentUser ? (
+  return isLoading ? (
     <div className="spinner-container">
       <Spinner color="info" />
     </div>
@@ -113,6 +120,10 @@ const App = ({ onGetCurrentUser, isFetchingCurrentUser }) => {
             <ContactProfileView />
           </PrivateRoute>
 
+          <PrivateRoute path="/users" exact redirectTo="/login">
+            <AllUsersView />
+          </PrivateRoute>
+
           <Route>
             <NotFoundView />
           </Route>
@@ -123,7 +134,7 @@ const App = ({ onGetCurrentUser, isFetchingCurrentUser }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isFetchingCurrentUser: state.auth.isFetchingCurrentUser,
+  isLoading: state.auth.isLoading,
 });
 
 const mapDispatchToProps = {
