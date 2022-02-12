@@ -65,14 +65,21 @@ const NotFoundView = lazy(
     ) /* webpackChunkName: "not-found-view" */
 );
 
+const ContactProfileView = lazy(
+  () =>
+    import(
+      "./components/views/ContactProfileView"
+    ) /* webpackChunkName: "contact-profile-view" */
+);
+
 const App = ({ onGetCurrentUser, getAddedContacts, isFetchingCurrentUser }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
 
-  useEffect(() => {
-    getAddedContacts();
-  }, [getAddedContacts]);
+  // useEffect(() => {
+  //   getAddedContacts();
+  // }, [getAddedContacts]);
 
   return isFetchingCurrentUser ? (
     <div className="spinner-container">
@@ -98,13 +105,18 @@ const App = ({ onGetCurrentUser, getAddedContacts, isFetchingCurrentUser }) => {
           <PrivateRoute path="/user-menu" redirectTo="/login">
             <User />
           </PrivateRoute>
-          <PrivateRoute path="/user-contacts" redirectTo="/login">
+          <PrivateRoute path="/user-contacts" exact redirectTo="/login">
             <UserContactsView />
           </PrivateRoute>
 
           <PrivateRoute path="/user-transactions" redirectTo="/login">
             <UserTransactions />
           </PrivateRoute>
+
+          <PrivateRoute path="/user-contacts/:id" redirectTo="/login">
+            <ContactProfileView />
+          </PrivateRoute>
+
           <Route>
             <NotFoundView />
           </Route>

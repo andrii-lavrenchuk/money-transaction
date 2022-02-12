@@ -9,10 +9,20 @@ import UpdateUserProfile from "./UpdateUserProfile";
 
 import { Button } from "reactstrap";
 
-const User = ({ onLogout, currentUserId, getCurrentUserProfile }) => {
+const User = ({
+  onLogout,
+  currentUserId,
+  getCurrentUserProfile,
+  getAddedContacts,
+  addedContacts,
+}) => {
   useEffect(() => {
-    getCurrentUserProfile();
-  }, [getCurrentUserProfile]);
+    !currentUserId && getCurrentUserProfile();
+  }, [getCurrentUserProfile, currentUserId]);
+
+  useEffect(() => {
+    !currentUserId && getAddedContacts();
+  }, [getAddedContacts, currentUserId]);
 
   return (
     <div>
@@ -27,11 +37,13 @@ const User = ({ onLogout, currentUserId, getCurrentUserProfile }) => {
 
 const mapStateToProps = (state) => ({
   currentUserId: state.users.currentUser.id,
+  addedContacts: state.users.addedContact,
 });
 
 const mapDispatchToProps = {
   onLogout: authOperations.logOut,
   getCurrentUserProfile: usersOperations.getCurrentProfile,
+  getAddedContacts: usersOperations.getAddedContacts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);
