@@ -5,8 +5,7 @@ import { lazy, Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
 // components
-import { Spinner } from "reactstrap";
-
+import Loader from "./components/Loader";
 import Container from "./components/Container";
 import AppBar from "./components/AppBar";
 import PrivateRoute from "./components/PrivateRoute";
@@ -85,9 +84,7 @@ const App = ({ onGetCurrentUser, isLoading }) => {
   }, [onGetCurrentUser]);
 
   return isLoading ? (
-    <div className="spinner-container">
-      <Spinner color="info" />
-    </div>
+    <Loader />
   ) : (
     <Container>
       <ToastContainer autoClose={3000} />

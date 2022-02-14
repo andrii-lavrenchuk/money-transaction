@@ -99,11 +99,18 @@ const contactsList = createReducer([], {
     state.filter(({ user }) => user !== payload),
 });
 
+const isLoading = createReducer(false, {
+  [usersActions.makeContactsListRequest]: () => true,
+  [usersActions.makeContactsListSuccess]: () => false,
+  [usersActions.makeContactsListError]: () => false,
+});
+
 const currentUserReducer = combineReducers({
   currentUser,
   contactsFound,
   contactsList,
   addedContact,
+  isLoading,
 });
 
 export default currentUserReducer;

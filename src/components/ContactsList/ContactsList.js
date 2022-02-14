@@ -2,13 +2,27 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 
 import ContactSearch from "../ContactsSearch";
+import Loader from "../Loader";
 import Contact from "../Contact";
 
-import { ListGroup, ListGroupItem, Row, Col, Spinner } from "reactstrap";
+import {
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Col,
+  Spinner,
+  Button,
+} from "reactstrap";
 import { usersOperations } from "../../redux/users";
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
-const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
+const ContactsList = ({
+  contactsList,
+  getContactsList,
+  addedContact,
+  isLoading,
+  onDeleteContact,
+}) => {
   const location = useLocation();
   const { url } = useRouteMatch();
 
@@ -16,8 +30,8 @@ const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
     getContactsList();
   }, [addedContact]);
 
-  return false ? (
-    <Spinner color="info" size=""></Spinner>
+  return isLoading ? (
+    <Loader />
   ) : (
     <>
       <ContactSearch />
@@ -48,6 +62,14 @@ const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
                         lastName={contact.lastName}
                       />
                     </Link>
+                    <Button
+                      onClick={() => onDeleteContact(contact.user)}
+                      color="danger"
+                      outline
+                    >
+                      <Spinner size="sm" />
+                      Delete
+                    </Button>
                   </ListGroupItem>
                 ))}
               </ListGroup>
@@ -62,10 +84,12 @@ const ContactsList = ({ contactsList, getContactsList, addedContact }) => {
 const mapStateToProps = (state) => ({
   contactsList: state.users.contactsList,
   addedContact: state.users.addedContact,
+  isLoading: state.users.isLoading,
 });
 
 const mapDispatchToProps = {
   getContactsList: usersOperations.getContactsList,
+  onDeleteContact: usersOperations.deleteContact,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);
