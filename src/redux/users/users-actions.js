@@ -38,6 +38,10 @@ const deleteContactRequest = createAction("users/deleteContactRequest");
 const deleteContactSuccess = createAction("users/deleteContactSuccess");
 const deleteContactError = createAction("users/deleteContactError");
 
+const getAllProfilesRequest = createAction("users/getAllProfilesRequest");
+const getAllProfilesSuccess = createAction("users/getAllProfilesSuccess");
+const getAllProfilesError = createAction("users/getAllProfilesError");
+
 const usersActions = {
   createUserProfileRequest,
   createUserProfileSuccess,
@@ -70,6 +74,10 @@ const usersActions = {
   deleteContactRequest,
   deleteContactSuccess,
   deleteContactError,
+
+  getAllProfilesRequest,
+  getAllProfilesSuccess,
+  getAllProfilesError,
 };
 
 export default usersActions;

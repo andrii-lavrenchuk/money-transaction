@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { usersOperations } from "../../redux/users";
 
+// TODO: DELETE
 import {
   FormGroup,
   Input,
@@ -79,9 +80,9 @@ const ContactSearch = ({
               </ListGroup>
             </Col>
           </Row>
-          <Button onClick={onAddContact} className="mt-4" color="info" outline>
+          {/* <Button onClick={onAddContact} className="mt-4" color="info" outline>
             Add to my contacts
-          </Button>
+          </Button> */}
         </>
       ) : null}
     </>

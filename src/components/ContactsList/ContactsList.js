@@ -1,13 +1,10 @@
 import { connect } from "react-redux";
 import { useEffect } from "react";
 
-import ContactSearch from "../ContactsSearch";
 import Loader from "../Loader";
 import Contact from "../Contact";
 
-import { ListGroup, ListGroupItem, Row, Col, Button } from "reactstrap";
-
-import { Spinner } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { usersOperations } from "../../redux/users";
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
@@ -29,45 +26,33 @@ const ContactsList = ({
     <Loader />
   ) : (
     <>
-      <ContactSearch />
       {contactsList.length === 0 ? (
-        <p>Add fisrt contact</p>
+        <h4>Add fisrt contact</h4>
       ) : (
-        <Row className="justify-content-center mt-5">
-          <Col md={3}>
-            {false ? (
-              <Spinner />
-            ) : (
-              <ListGroup>
-                {contactsList.map((contact) => (
-                  <ListGroupItem
-                    className="mt-2 mb-3"
-                    color="info"
-                    key={contact.id}
-                  >
-                    <Link
-                      className="d-block"
-                      to={{
-                        pathname: `${url}/${contact.user}`,
-                        state: { from: location },
-                      }}
-                    >
-                      <Contact
-                        firstName={contact.firstName}
-                        lastName={contact.lastName}
-                      />
-                    </Link>
-                    <Button
-                      onClick={() => onDeleteContact(contact.user)}
-                      color="danger"
-                      outline
-                    >
-                      Delete
-                    </Button>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            )}
+        <Row className="justify-content-center">
+          <Col md={6} lg={8}>
+            {contactsList.map((contact) => (
+              <div key={contact.id}>
+                <Link
+                  className="d-block"
+                  to={{
+                    pathname: `${url}/${contact.user}`,
+                    state: { from: location },
+                  }}
+                >
+                  <Contact
+                    firstName={contact.firstName}
+                    lastName={contact.lastName}
+                  />
+                </Link>
+                <Button
+                  onClick={() => onDeleteContact(contact.user)}
+                  variant="outline-danger"
+                >
+                  Delete
+                </Button>
+              </div>
+            ))}
           </Col>
         </Row>
       )}

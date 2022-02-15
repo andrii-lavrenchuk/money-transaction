@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 
 const SendMoneyModal = (props) => {
   const { currentuserid, userid, value, sendMoney, children, onHide } = props;
-  console.log(props);
   const onSendButtonCLick = () => {
     if (props.value < 1 || props.value === 0) {
       toast.error("jhhkhkh");

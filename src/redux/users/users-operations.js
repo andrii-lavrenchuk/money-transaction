@@ -155,10 +155,6 @@ const getAddedContacts = () => async (dispatch, getState) => {
     auth: { id },
   } = getState();
 
-  const {
-    users: { addedContact },
-  } = getState();
-
   if (!id) {
     return;
   }
@@ -181,6 +177,23 @@ const getAddedContacts = () => async (dispatch, getState) => {
   }
 };
 
+const getAllProfiles = (page) => async (dispatch) => {
+  dispatch(usersActions.getAllProfilesRequest());
+
+  try {
+    const response = await axios.get("/rest/v1/profile?select=*", {
+      headers: {
+        ...headers,
+        Range: `0-4`,
+      },
+    });
+
+    dispatch(usersActions.getAllProfilesSuccess(response.data));
+  } catch (error) {
+    dispatch(usersActions.getAllProfilesError(error));
+  }
+};
+
 export default {
   createProfile,
   updateProfile,
@@ -190,4 +203,5 @@ export default {
   getAddedContacts,
   getContactsList,
   deleteContact,
+  getAllProfiles,
 };
