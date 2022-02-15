@@ -23,7 +23,7 @@ const contactsListInitialState = {
 const currentUser = createReducer(currentUserInitialState, {
   [usersActions.createUserProfileSuccess]: (_, { payload }) => ({
     email: payload[0].email,
-    id: payload[0].id,
+    id: payload[0].user,
     firstName: payload[0].firstName,
     lastName: payload[0].lastName,
   }),
