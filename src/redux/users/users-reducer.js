@@ -103,6 +103,14 @@ const isLoading = createReducer(false, {
   [usersActions.makeContactsListRequest]: () => true,
   [usersActions.makeContactsListSuccess]: () => false,
   [usersActions.makeContactsListError]: () => false,
+
+  [usersActions.deleteContactRequest]: () => true,
+  [usersActions.deleteContactSuccess]: () => false,
+  [usersActions.deleteContactError]: () => false,
+
+  [usersActions.getCurrentUserProfileRequest]: () => true,
+  [usersActions.getCurrentUserProfileSuccess]: () => false,
+  [usersActions.getCurrentUserProfileError]: () => false,
 });
 
 const currentUserReducer = combineReducers({

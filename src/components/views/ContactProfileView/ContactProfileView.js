@@ -40,6 +40,7 @@ const ContactProfileView = ({ contactsList }) => {
         show={showModal}
         onHide={() => setShowModal(false)}
         value={inputValue}
+        userid={id}
       >
         <Form.Group as={Col} md="3" controlId="validationFormik05">
           <Form.Label>Amount</Form.Label>

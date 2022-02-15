@@ -5,14 +5,9 @@ import ContactSearch from "../ContactsSearch";
 import Loader from "../Loader";
 import Contact from "../Contact";
 
-import {
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Col,
-  Spinner,
-  Button,
-} from "reactstrap";
+import { ListGroup, ListGroupItem, Row, Col, Button } from "reactstrap";
+
+import { Spinner } from "react-bootstrap";
 import { usersOperations } from "../../redux/users";
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
@@ -67,7 +62,6 @@ const ContactsList = ({
                       color="danger"
                       outline
                     >
-                      <Spinner size="sm" />
                       Delete
                     </Button>
                   </ListGroupItem>

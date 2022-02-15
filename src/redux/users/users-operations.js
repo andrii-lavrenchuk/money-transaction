@@ -1,5 +1,4 @@
 import axios from "axios";
-import { authActions } from "../auth";
 import usersActions from "./users-actions";
 
 axios.defaults.baseURL = "https://lassognchwmnevcbvdwb.supabase.co";

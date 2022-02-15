@@ -90,7 +90,7 @@ const ContactSearch = ({
 
 const mapStateToProps = (state) => ({
   contactsFound: state.users.contactsFound,
-  userId: state.users.currentUser.id,
+  userId: state.auth.id,
 });
 
 const mapDispatchToProps = {

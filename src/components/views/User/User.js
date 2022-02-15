@@ -8,13 +8,14 @@ import CreateUserProfile from "./CreateUserProfile";
 import UpdateUserProfile from "./UpdateUserProfile";
 
 import { Button } from "reactstrap";
+import Loader from "../../Loader";
 
 const User = ({
   onLogout,
   currentUserId,
   getCurrentUserProfile,
   getAddedContacts,
-  addedContacts,
+  isLoading,
 }) => {
   useEffect(() => {
     !currentUserId && getCurrentUserProfile();
@@ -24,7 +25,9 @@ const User = ({
     !currentUserId && getAddedContacts();
   }, [getAddedContacts, currentUserId]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div>
       {!currentUserId ? <CreateUserProfile /> : <UpdateUserProfile />}
 
@@ -38,6 +41,7 @@ const User = ({
 const mapStateToProps = (state) => ({
   currentUserId: state.users.currentUser.id,
   addedContacts: state.users.addedContact,
+  isLoading: state.users.isLoading,
 });
 
 const mapDispatchToProps = {
