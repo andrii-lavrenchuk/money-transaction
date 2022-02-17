@@ -114,6 +114,10 @@ const isLoading = createReducer(false, {
   [usersActions.getCurrentUserProfileRequest]: () => true,
   [usersActions.getCurrentUserProfileSuccess]: () => false,
   [usersActions.getCurrentUserProfileError]: () => false,
+
+  [usersActions.getAllProfilesRequest]: () => true,
+  [usersActions.getAllProfilesSuccess]: () => false,
+  [usersActions.getAllProfilesError]: () => false,
 });
 
 const currentUserReducer = combineReducers({

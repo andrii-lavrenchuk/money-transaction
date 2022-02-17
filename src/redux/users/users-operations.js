@@ -177,16 +177,18 @@ const getAddedContacts = () => async (dispatch, getState) => {
   }
 };
 
-const getAllProfiles = (page) => async (dispatch) => {
+const getAllProfiles = (from, to) => async (dispatch) => {
   dispatch(usersActions.getAllProfilesRequest());
 
   try {
     const response = await axios.get("/rest/v1/profile?select=*", {
       headers: {
         ...headers,
-        Range: `0-4`,
+        Range: `${from}-${to}`,
       },
     });
+
+    console.log(response);
 
     dispatch(usersActions.getAllProfilesSuccess(response.data));
   } catch (error) {
