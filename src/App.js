@@ -136,7 +136,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
-  getAddedContacts: usersOperations.getAddedContacts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -30,7 +30,7 @@ const ContactsList = ({
         <h4>Add fisrt contact</h4>
       ) : (
         <Row className="justify-content-center">
-          <Col md={6} lg={8}>
+          <Col md={6} lg={3}>
             {contactsList.map((contact) => (
               <div key={contact.id}>
                 <Link

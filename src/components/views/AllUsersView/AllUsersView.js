@@ -24,7 +24,7 @@ const AllUsersView = ({
     <>
       <h2>AllUsersView</h2>
       <Row className="justify-content-center">
-        <Col md={6} lg={8}>
+        <Col md={6} lg={3}>
           {allUsers.map((item) => (
             <div key={item.id}>
               <Contact firstName={item.firstName} lastName={item.lastName} />

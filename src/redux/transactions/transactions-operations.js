@@ -9,6 +9,21 @@ const headers = {
   apikey: API_KEY,
 };
 
+const getAllTransaction = () => async (dispatch) => {
+  dispatch(transactionsActions.getAllTransactionRequest());
+
+  try {
+    const response = await axios.get("/rest/v1/transaction?select=*", {
+      headers,
+    });
+
+    dispatch(transactionsActions.getAllTransactionSuccess(response.data));
+    console.log("getAllTransactionSuccess");
+  } catch (error) {
+    dispatch(transactionsActions.getAllTransactionError(error));
+  }
+};
+
 const makeTransaction = (params) => async (dispatch) => {
   dispatch(transactionsActions.makeTransactionRequest());
 
@@ -27,28 +42,4 @@ const makeTransaction = (params) => async (dispatch) => {
   }
 };
 
-const getAllTransaction = () => async (dispatch) => {
-  dispatch(transactionsActions.getAllTransactionRequest());
-
-  try {
-    const response = await axios.get("/rest/v1/transaction?select=*", {
-      headers,
-    });
-
-    dispatch(transactionsActions.getAllTransactionSuccess(response.data));
-  } catch (error) {
-    dispatch(transactionsActions.getAllTransactionError(error));
-  }
-};
-
-const setCurrentAmount = (amount) => async (dispatch) => {
-  dispatch(transactionsActions.setAmountRequest());
-
-  try {
-    dispatch(transactionsActions.setAmountSuccess(amount));
-  } catch (error) {
-    dispatch(transactionsActions.setAmountError(error));
-  }
-};
-
-export default { makeTransaction, getAllTransaction, setCurrentAmount };
+export default { makeTransaction, getAllTransaction };

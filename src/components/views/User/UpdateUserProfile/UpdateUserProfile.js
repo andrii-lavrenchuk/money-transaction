@@ -28,7 +28,7 @@ const UpdateUserProfile = ({ firstName, lastName, email, onUpdateProfile }) => {
 
     onUpdateProfile({
       firstName: newFirstName,
-      lastName: firstName,
+      lastName: newLastName,
       email: newEmail,
     });
   };

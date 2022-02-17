@@ -4,47 +4,53 @@ import { connect } from "react-redux";
 
 import Loader from "../../Loader";
 
-import { transactionsOperations } from "../../../redux/transactions";
+import {
+  transactionsOperations,
+  transactionsActions,
+} from "../../../redux/transactions";
+import { useDispatch } from "react-redux";
 
 const UserTransactions = ({
-  setAmount,
+  amount,
   getAllTransactions,
   allTransactions,
   currentUserId,
   isLoading,
 }) => {
-  const countBalance = () => {
-    let amount = 0;
+  const dispatch = useDispatch();
 
-    return (amount = allTransactions.reduce((total, item) => {
-      if (currentUserId === item.to) {
-        return total + item.amount;
-      }
-
-      if (currentUserId === item.from) {
-        return total - item.amount;
-      }
-
-      if (currentUserId === item.from && currentUserId === item.to) {
-        return total + item.amount;
-      }
-      amount = total;
-
-      return amount;
-    }, amount));
-  };
   useEffect(() => {
     getAllTransactions();
-  }, []);
+  }, [getAllTransactions]);
 
   useEffect(() => {
-    setAmount(countBalance());
-  }, []);
+    const countBalance = () => {
+      let amount = 0;
+
+      return (amount = allTransactions.reduce((total, item) => {
+        if (currentUserId === item.to) {
+          return total + item.amount;
+        }
+
+        if (currentUserId === item.from) {
+          return total - item.amount;
+        }
+
+        if (currentUserId === item.from && currentUserId === item.to) {
+          return total + item.amount;
+        }
+        amount = total;
+
+        return amount;
+      }, amount));
+    };
+    dispatch(transactionsActions.setAmountSuccess(countBalance()));
+  }, [allTransactions, currentUserId, dispatch]);
 
   return (
     <>
       <h2>User Transactions View</h2>
-      {isLoading ? <Loader /> : <h3>Your balance is {countBalance()} $</h3>}
+      {isLoading ? <Loader /> : <h3>Your balance is {amount} $</h3>}
     </>
   );
 };
@@ -53,11 +59,11 @@ const mapStateToProps = (state) => ({
   allTransactions: state.transactions.allUsersTransactions,
   currentUserId: state.users.currentUser.id,
   isLoading: state.transactions.isLoading,
+  amount: state.transactions.amount,
 });
 
 const mapDispatchToProps = {
   getAllTransactions: transactionsOperations.getAllTransaction,
-  setAmount: transactionsOperations.setCurrentAmount,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserTransactions);

@@ -4,7 +4,7 @@ import { combineReducers } from "redux";
 
 import transactionsActions from "./transactions-actions";
 
-const amount = createReducer(0, {
+const amount = createReducer(1000, {
   [transactionsActions.setAmountSuccess]: (_, { payload }) => payload,
 });
 

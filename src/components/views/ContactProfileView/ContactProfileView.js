@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { useParams, useHistory, useLocation } from "react-router-dom";
-import { Form, Col, Button } from "react-bootstrap";
+import { Form, Col, Button, Card } from "react-bootstrap";
 
 import SendMoneyModal from "../../SendMoneyModal";
 
@@ -26,15 +26,19 @@ const ContactProfileView = ({ contactsList }) => {
   };
 
   return (
-    <>
-      <button type="button" onClick={onBackButtonCLick}>
+    <div className="p-5">
+      <Button variant="outline-dark" type="Button" onClick={onBackButtonCLick}>
         Back to list
-      </button>
-      <h2>ContactProfileView</h2>
-      <h2>{firstName}</h2>
-      <h2>{lastName}</h2>
-      <h2>{email}</h2>
-      <Button onClick={() => setShowModal(true)}>Send money</Button>
+      </Button>
+      <Card>
+        <Card.Header>ContactProfileView</Card.Header>
+        <Card.Title>{firstName}</Card.Title>
+        <Card.Title>{lastName}</Card.Title>
+        <Card.Text>{email}</Card.Text>
+      </Card>
+      <Button variant="outline-info" onClick={() => setShowModal(true)}>
+        Send money
+      </Button>
 
       <SendMoneyModal
         show={showModal}
@@ -55,7 +59,7 @@ const ContactProfileView = ({ contactsList }) => {
           />
         </Form.Group>
       </SendMoneyModal>
-    </>
+    </div>
   );
 };
 
