@@ -20,9 +20,11 @@ const UserTransactions = ({
   allProfiles,
 }) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     getAllTransactions();
   }, [getAllTransactions]);
+
   useEffect(() => {
     const countBalance = () => {
       let amount = 0;
@@ -44,6 +46,7 @@ const UserTransactions = ({
         return amount;
       }, amount));
     };
+
     dispatch(transactionsActions.setAmountSuccess(countBalance()));
   }, [allTransactions, currentUserId, dispatch]);
 

@@ -4,7 +4,7 @@ import { authSelectors } from "../redux/auth";
 
 export default function PublicRoute({
   children,
-  redirectTo,
+  redirectTo = "/",
   restricted = false,
   ...routeProps
 }) {

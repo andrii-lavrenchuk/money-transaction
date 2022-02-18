@@ -46,6 +46,18 @@ const isLoading = createReducer(false, {
   [authActions.getCurrentUserRequest]: () => true,
   [authActions.getCurrentUserSuccess]: () => false,
   [authActions.getCurrentUserError]: () => false,
+
+  [authActions.loginRequest]: () => true,
+  [authActions.loginSuccess]: () => false,
+  [authActions.loginError]: () => false,
+
+  [authActions.registerRequest]: () => true,
+  [authActions.registerSuccess]: () => false,
+  [authActions.registerError]: () => false,
+
+  [authActions.logoutRequest]: () => true,
+  [authActions.logoutSuccess]: () => false,
+  [authActions.logoutError]: () => false,
 });
 
 const authReducer = combineReducers({

@@ -23,7 +23,7 @@ const AllUsersView = ({
   const perPage = 5;
   let alContentLength = Number(Math.ceil(contentLength.slice(-3)));
   let paginationLength = 0;
-  paginationLength = alContentLength / perPage;
+  paginationLength = Math.ceil(alContentLength / perPage);
 
   const disablingButton = (id) => {
     return addedContacts.includes(id);

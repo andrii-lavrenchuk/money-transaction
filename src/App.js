@@ -14,13 +14,11 @@ import PublicRoute from "./components/PublicRoute";
 // operations
 
 import { authOperations } from "./redux/auth";
-import { usersOperations } from "./redux/users";
 
 // styles
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import { transactionsOperations } from "./redux/transactions";
 
 // views
 const HomeView = lazy(
@@ -31,13 +29,15 @@ const HomeView = lazy(
 const RegisterView = lazy(
   () =>
     import(
-      "./components/views/RegisterView"
+      "./components/views/Auth/RegisterView"
     ) /* webpackChunkName: "register-view" */
 );
 
 const LoginView = lazy(
   () =>
-    import("./components/views/LoginView") /* webpackChunkName: "login-view" */
+    import(
+      "./components/views/Auth/LoginView"
+    ) /* webpackChunkName: "login-view" */
 );
 
 const User = lazy(
@@ -79,7 +79,7 @@ const AllUsersView = lazy(
     ) /* webpackChunkName: "users-view" */
 );
 
-const App = ({ onGetCurrentUser, isLoading, getAllTransactions }) => {
+const App = ({ onGetCurrentUser, isLoading }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
