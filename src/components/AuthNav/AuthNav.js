@@ -4,7 +4,7 @@ import styles from "./AuthNav.module.scss";
 
 const AuthNav = () => {
   return (
-    <div>
+    <>
       <NavLink
         to="/register"
         className={styles.link}
@@ -19,7 +19,7 @@ const AuthNav = () => {
       >
         Sign In
       </NavLink>
-    </div>
+    </>
   );
 };
 

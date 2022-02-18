@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import ReactPaginate from "react-paginate";
 import { connect } from "react-redux";
 import { usersOperations } from "../../../redux/users";
 
 import Contact from "../../Contact";
 import Loader from "../../Loader";
+import Pagination from "../../Pagination";
 
 const AllUsersView = ({
   getAllUsers,
@@ -14,7 +14,9 @@ const AllUsersView = ({
   userId,
   addedContacts,
   isLoading,
+  contentLength,
 }) => {
+  const perPage = 5;
   useEffect(() => {
     getAllUsers(0, 4);
   }, [getAllUsers]);
@@ -24,7 +26,6 @@ const AllUsersView = ({
   };
 
   const handlePageClick = async (data) => {
-    const perPage = 5;
     let page = data.selected + 1;
     const from = (page - 1) * perPage;
     const to = (page - 1) * perPage + perPage - 1;
@@ -63,32 +64,22 @@ const AllUsersView = ({
           </Row>
         </>
       )}
-      <ReactPaginate
-        previousLabel={"prev"}
-        nextLabel={"next"}
-        breakLabel={"..."}
-        pageCount={50}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination justify-content-center mt-5"}
-        pageClassName={"page-item"}
-        pageLinkClassName={"page-link"}
-        previouslassName={"page-item"}
-        previousLinkClassName={"page-link"}
-        nextClassName={"page-item"}
-        nextLinkClassName={"page-link"}
-        breakClassName={"page-item"}
-        breakLinkClassName={"page-link"}
-        activeClassName={"active"}
+
+      <Pagination
+        contentLength={contentLength}
+        handlePageClick={handlePageClick}
+        perPage={perPage}
       />
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  allUsers: state.users.allProfiles,
+  allUsers: state.users.allProfiles.profiles,
   userId: state.auth.id,
   addedContacts: state.users.addedContact,
   isLoading: state.users.isLoading,
+  contentLength: state.users.allProfiles.contentLength,
 });
 
 const mapDispatchToProps = {

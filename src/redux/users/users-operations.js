@@ -185,12 +185,11 @@ const getAllProfiles = (from, to) => async (dispatch) => {
       headers: {
         ...headers,
         Range: `${from}-${to}`,
+        Prefer: "count=exact,head=true",
       },
     });
 
-    console.log(response);
-
-    dispatch(usersActions.getAllProfilesSuccess(response.data));
+    dispatch(usersActions.getAllProfilesSuccess(response));
   } catch (error) {
     dispatch(usersActions.getAllProfilesError(error));
   }

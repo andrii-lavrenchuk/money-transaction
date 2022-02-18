@@ -1,8 +1,9 @@
+import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 
 const Navigation = () => (
-  <nav>
+  <>
     <NavLink
       to="/users"
       className={styles.link}
@@ -36,7 +37,7 @@ const Navigation = () => (
     >
       User Menu
     </NavLink>
-  </nav>
+  </>
 );
 
 export default Navigation;

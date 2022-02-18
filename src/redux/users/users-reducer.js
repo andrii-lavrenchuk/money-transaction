@@ -20,6 +20,11 @@ const contactsListInitialState = {
   lastName: "",
 };
 
+const profiles = {
+  contentLength: "",
+  profiles: [],
+};
+
 const currentUser = createReducer(currentUserInitialState, {
   [usersActions.createUserProfileSuccess]: (_, { payload }) => ({
     email: payload[0].email,
@@ -98,8 +103,13 @@ const contactsList = createReducer([], {
   [usersActions.deleteContactSuccess]: (state, { payload }) =>
     state.filter(({ user }) => user !== payload),
 });
-const allProfiles = createReducer([], {
-  [usersActions.getAllProfilesSuccess]: (_, { payload }) => payload,
+const allProfiles = createReducer(profiles, {
+  [usersActions.getAllProfilesSuccess]: (_, { payload }) => {
+    return {
+      contentLength: payload.headers["content-range"],
+      profiles: payload.data,
+    };
+  },
 });
 
 const isLoading = createReducer(false, {
