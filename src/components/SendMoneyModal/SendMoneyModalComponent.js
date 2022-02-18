@@ -6,7 +6,8 @@ import { transactionsOperations } from "../../redux/transactions";
 import { connect } from "react-redux";
 
 const SendMoneyModal = (props) => {
-  const { currentuserid, userid, value, onClick, children, onHide } = props;
+  const { currentuserid, userid, value, children, onHide } = props;
+
   const onSendButtonClick = () => {
     if (props.value < 1 || props.value === 0) {
       toast.error("jhhkhkh");
@@ -23,8 +24,8 @@ const SendMoneyModal = (props) => {
       to: userid,
       amount: value,
     };
-
-    onClick(transaction);
+    props.send(transaction);
+    toast.info("Money was sent");
     onHide();
   };
 
@@ -54,7 +55,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onClick: transactionsOperations.makeTransaction,
+  send: transactionsOperations.makeTransaction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendMoneyModal);

@@ -84,10 +84,6 @@ const App = ({ onGetCurrentUser, isLoading, getAllTransactions }) => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
 
-  useEffect(() => {
-    getAllTransactions();
-  }, [getAllTransactions]);
-
   return isLoading ? (
     <Loader />
   ) : (
@@ -141,7 +137,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
-  getAllTransactions: transactionsOperations.getAllTransaction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

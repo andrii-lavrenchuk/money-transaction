@@ -4,8 +4,9 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import { Form, Col, Button, Card } from "react-bootstrap";
 
 import SendMoneyModal from "../../SendMoneyModal";
+import Loader from "../../Loader";
 
-const ContactProfileView = ({ contactsList }) => {
+const ContactProfileView = ({ contactsList, isLoading }) => {
   const [showModal, setShowModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -25,7 +26,9 @@ const ContactProfileView = ({ contactsList }) => {
     setInputValue(value);
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="container">
       <div className="row">
         <div className="col-lg-6 p-5">
@@ -69,6 +72,7 @@ const ContactProfileView = ({ contactsList }) => {
 
 const mapStateToProps = (state) => ({
   contactsList: state.users.contactsList,
+  isLoading: state.transactions.isLoading,
 });
 
 export default connect(mapStateToProps, null)(ContactProfileView);
