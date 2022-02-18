@@ -1,16 +1,12 @@
 import ReactPaginate from "react-paginate";
 
-const Pagination = ({ contentLength, handlePageClick, perPage }) => {
-  let alContentLength = Number(Math.ceil(contentLength.slice(-3)));
-  let paginationLength = 0;
-  paginationLength = alContentLength / perPage;
-
+const Pagination = ({ contentLength, handlePageClick }) => {
   return (
     <ReactPaginate
       previousLabel={"prev"}
       nextLabel={"next"}
       breakLabel={"..."}
-      pageCount={paginationLength}
+      pageCount={contentLength}
       onPageChange={handlePageClick}
       containerClassName={"pagination justify-content-center mt-5"}
       pageClassName={"page-item"}

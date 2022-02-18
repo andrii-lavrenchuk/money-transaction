@@ -14,6 +14,7 @@ const ContactsList = ({
   addedContact,
   isLoading,
   onDeleteContact,
+  visibleContacts,
 }) => {
   const location = useLocation();
   const { url } = useRouteMatch();
@@ -31,7 +32,7 @@ const ContactsList = ({
       ) : (
         <div className="d-flex justify-content-center">
           <Col md={6} lg={3}>
-            {contactsList.map((contact) => (
+            {visibleContacts.map((contact) => (
               <div key={contact.id}>
                 <Link
                   className="d-block"
@@ -61,9 +62,9 @@ const ContactsList = ({
 };
 
 const mapStateToProps = (state) => ({
-  contactsList: state.users.contactsList,
   addedContact: state.users.addedContact,
   isLoading: state.users.isLoading,
+  contactsList: state.users.contactsList,
 });
 
 const mapDispatchToProps = {

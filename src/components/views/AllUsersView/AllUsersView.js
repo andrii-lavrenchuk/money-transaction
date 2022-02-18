@@ -16,10 +16,14 @@ const AllUsersView = ({
   isLoading,
   contentLength,
 }) => {
-  const perPage = 5;
   useEffect(() => {
     getAllUsers(0, 4);
   }, [getAllUsers]);
+
+  const perPage = 5;
+  let alContentLength = Number(Math.ceil(contentLength.slice(-3)));
+  let paginationLength = 0;
+  paginationLength = alContentLength / perPage;
 
   const disablingButton = (id) => {
     return addedContacts.includes(id);
@@ -66,7 +70,7 @@ const AllUsersView = ({
       )}
 
       <Pagination
-        contentLength={contentLength}
+        contentLength={paginationLength}
         handlePageClick={handlePageClick}
         perPage={perPage}
       />

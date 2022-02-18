@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Loader from "../../Loader";
+import CustomTable from "../../Table";
 
 import {
   transactionsOperations,
@@ -12,16 +13,13 @@ import { useDispatch } from "react-redux";
 
 const UserTransactions = ({
   amount,
-  getAllTransactions,
+
   allTransactions,
   currentUserId,
   isLoading,
+  allProfiles,
 }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    getAllTransactions();
-  }, [getAllTransactions]);
 
   useEffect(() => {
     const countBalance = () => {
@@ -47,23 +45,56 @@ const UserTransactions = ({
     dispatch(transactionsActions.setAmountSuccess(countBalance()));
   }, [allTransactions, currentUserId, dispatch]);
 
+  const allUserTransactions = allTransactions.filter(
+    (item) => item.from === currentUserId
+  );
+  const allTransactionsToUser = allTransactions.filter(
+    (item) => item.to === currentUserId
+  );
+
+  const transactionFrom = allUserTransactions.map((item) => {
+    return {
+      to: item.to,
+      amount: item.amount,
+    };
+  });
+  const transactionTo = allTransactionsToUser.map((item) => {
+    return {
+      from: item.from,
+      amount: item.amount,
+    };
+  });
+
+  const transactions = {
+    from: "",
+    to: "",
+    amount: 0,
+  };
+
   return (
     <>
-      <h2>User Transactions View</h2>
-      {isLoading ? <Loader /> : <h3>Your balance is {amount} $</h3>}
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6">
+            <h2>User Transactions View</h2>
+            {isLoading ? <Loader /> : <h3>Your balance is {amount} $</h3>}
+          </div>
+          <div className="col-lg-6">
+            <CustomTable />
+          </div>
+        </div>
+      </div>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
+  allProfiles: state.users.allProfiles.profiles,
+
   allTransactions: state.transactions.allUsersTransactions,
   currentUserId: state.users.currentUser.id,
   isLoading: state.transactions.isLoading,
   amount: state.transactions.amount,
 });
 
-const mapDispatchToProps = {
-  getAllTransactions: transactionsOperations.getAllTransaction,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserTransactions);
+export default connect(mapStateToProps, null)(UserTransactions);

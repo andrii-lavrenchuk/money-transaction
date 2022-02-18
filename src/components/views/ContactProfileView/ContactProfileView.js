@@ -26,39 +26,43 @@ const ContactProfileView = ({ contactsList }) => {
   };
 
   return (
-    <div className="p-5">
-      <Button variant="outline-dark" type="Button" onClick={onBackButtonCLick}>
-        Back to list
-      </Button>
-      <Card>
-        <Card.Header>ContactProfileView</Card.Header>
-        <Card.Title>{firstName}</Card.Title>
-        <Card.Title>{lastName}</Card.Title>
-        <Card.Text>{email}</Card.Text>
-      </Card>
-      <Button variant="outline-info" onClick={() => setShowModal(true)}>
-        Send money
-      </Button>
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-6 p-5">
+          <Button
+            variant="outline-dark"
+            type="Button"
+            onClick={onBackButtonCLick}
+          >
+            Back to list
+          </Button>
+          <Card>
+            <Card.Header>ContactProfileView</Card.Header>
+            <Card.Title>{firstName}</Card.Title>
+            <Card.Title>{lastName}</Card.Title>
+            <Card.Text>{email}</Card.Text>
+          </Card>
+          <Button variant="outline-info" onClick={() => setShowModal(true)}>
+            Send money
+          </Button>
 
-      <SendMoneyModal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        value={inputValue}
-        userid={id}
-      >
-        <Form.Group as={Col} md="3" controlId="validationFormik05">
-          <Form.Label>Amount</Form.Label>
-          <Form.Control
-            type="number"
-            name="zip"
+          <SendMoneyModal
+            show={showModal}
+            onHide={() => setShowModal(false)}
             value={inputValue}
-            onChange={handleChange}
-            valid="true"
-            // invalid={}
-            // isInvalid={!!errors.zip}
-          />
-        </Form.Group>
-      </SendMoneyModal>
+            userid={id}
+          >
+            <Form.Group as={Col} md="3" controlId="validationFormik05">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type="number"
+                value={inputValue}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </SendMoneyModal>
+        </div>
+      </div>
     </div>
   );
 };

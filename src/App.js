@@ -20,6 +20,7 @@ import { usersOperations } from "./redux/users";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
+import { transactionsOperations } from "./redux/transactions";
 
 // views
 const HomeView = lazy(
@@ -78,10 +79,14 @@ const AllUsersView = lazy(
     ) /* webpackChunkName: "users-view" */
 );
 
-const App = ({ onGetCurrentUser, isLoading }) => {
+const App = ({ onGetCurrentUser, isLoading, getAllTransactions }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
+
+  useEffect(() => {
+    getAllTransactions();
+  }, [getAllTransactions]);
 
   return isLoading ? (
     <Loader />
@@ -136,6 +141,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
+  getAllTransactions: transactionsOperations.getAllTransaction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
