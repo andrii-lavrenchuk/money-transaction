@@ -6,7 +6,7 @@ const UserContactsView = ({ currentUserId, isLoading }) => {
   return currentUserId ? (
     <>
       <h2>User Contacts View</h2>
-      {isLoading ? <p>LOADING...</p> : <ContactsList />}
+      <ContactsList />
     </>
   ) : (
     <h2>You have to create profile first</h2>

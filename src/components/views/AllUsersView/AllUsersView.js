@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { usersOperations } from "../../../redux/users";
 
@@ -40,7 +40,7 @@ const AllUsersView = ({
       ) : (
         <>
           <h2>AllUsersView</h2>
-          <Row className="justify-content-center">
+          <div className="d-flex justify-content-center">
             <Col md={6} lg={3}>
               {allUsers.map((item) => (
                 <div key={item.id}>
@@ -61,7 +61,7 @@ const AllUsersView = ({
                 </div>
               ))}
             </Col>
-          </Row>
+          </div>
         </>
       )}
 

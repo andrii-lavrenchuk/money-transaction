@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Loader from "../Loader";
 import Contact from "../Contact";
 
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { usersOperations } from "../../redux/users";
 import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
@@ -29,7 +29,7 @@ const ContactsList = ({
       {contactsList.length === 0 ? (
         <h4>Add fisrt contact</h4>
       ) : (
-        <Row className="justify-content-center">
+        <div className="d-flex justify-content-center">
           <Col md={6} lg={3}>
             {contactsList.map((contact) => (
               <div key={contact.id}>
@@ -54,7 +54,7 @@ const ContactsList = ({
               </div>
             ))}
           </Col>
-        </Row>
+        </div>
       )}
     </>
   );
