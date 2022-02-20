@@ -128,6 +128,18 @@ const isLoading = createReducer(false, {
   [usersActions.getAllProfilesRequest]: () => true,
   [usersActions.getAllProfilesSuccess]: () => false,
   [usersActions.getAllProfilesError]: () => false,
+
+  [usersActions.createUserProfileRequest]: () => true,
+  [usersActions.createUserProfileSuccess]: () => false,
+  [usersActions.createUserProfileError]: () => false,
+
+  [usersActions.addContactRequest]: () => true,
+  [usersActions.addContactSuccess]: () => false,
+  [usersActions.addContactError]: () => false,
+
+  [usersActions.updateUserProfileRequest]: () => true,
+  [usersActions.updateUserProfileSuccess]: () => false,
+  [usersActions.updateUserProfileError]: () => false,
 });
 
 const currentUserReducer = combineReducers({

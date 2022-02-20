@@ -16,6 +16,10 @@ const isLoading = createReducer(false, {
   [transactionsActions.getAllTransactionRequest]: () => true,
   [transactionsActions.getAllTransactionSuccess]: () => false,
   [transactionsActions.getAllTransactionError]: () => false,
+
+  [transactionsActions.makeTransactionRequest]: () => true,
+  [transactionsActions.makeTransactionSuccess]: () => false,
+  [transactionsActions.makeTransactionError]: () => false,
 });
 
 const transactionsReducer = combineReducers({

@@ -31,6 +31,7 @@ const SendMoneyModal = (props) => {
     };
     props.send(transaction);
     toast.info("Money was sent");
+
     onHide();
   };
 

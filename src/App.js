@@ -88,7 +88,7 @@ const App = ({ onGetCurrentUser, isLoading }) => {
     <Loader />
   ) : (
     <Container>
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={3000} theme="colored" />
       <AppBar />
 
       <Suspense fallback={null}>

@@ -30,9 +30,10 @@ const ContactProfileView = ({ contactsList, isLoading }) => {
     <Loader />
   ) : (
     <div className="container">
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="col-lg-6 p-5">
           <Button
+            className="mb-5"
             variant="outline-dark"
             type="Button"
             onClick={onBackButtonCLick}
@@ -41,11 +42,17 @@ const ContactProfileView = ({ contactsList, isLoading }) => {
           </Button>
           <Card>
             <Card.Header>ContactProfileView</Card.Header>
-            <Card.Title>{firstName}</Card.Title>
-            <Card.Title>{lastName}</Card.Title>
-            <Card.Text>{email}</Card.Text>
+            <div className="p-5">
+              <Card.Title>{firstName}</Card.Title>
+              <Card.Title>{lastName}</Card.Title>
+              <Card.Text>{email}</Card.Text>
+            </div>
           </Card>
-          <Button variant="outline-info" onClick={() => setShowModal(true)}>
+          <Button
+            className="mt-5"
+            variant="outline-info"
+            onClick={() => setShowModal(true)}
+          >
             Send money
           </Button>
 
