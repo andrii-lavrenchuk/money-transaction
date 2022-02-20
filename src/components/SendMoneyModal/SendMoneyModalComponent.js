@@ -15,7 +15,12 @@ const SendMoneyModal = (props) => {
     }
 
     if (props.amount <= 0) {
-      toast.error("Your amount 0");
+      toast.error("Your amount is 0");
+      return;
+    }
+
+    if (props.amount < props.value) {
+      toast.error("Not enough money");
       return;
     }
 

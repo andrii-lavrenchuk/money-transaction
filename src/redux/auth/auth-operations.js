@@ -1,5 +1,6 @@
 import axios from "axios";
 import authActions from "./auth-actions";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "https://lassognchwmnevcbvdwb.supabase.co";
 
@@ -32,6 +33,17 @@ const register = (credentials) => async (dispatch) => {
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
     dispatch(authActions.registerError(error.message));
+
+    if (error.response.status === 400) {
+      toast.error("Please try again!");
+      return;
+    } else if (error.response.status === 500) {
+      toast.error("Oops! Something wrong with server, please try later!");
+      return;
+    } else {
+      toast.error("Something went wrong!");
+      return;
+    }
   }
 };
 
@@ -52,6 +64,8 @@ const login = (credentials) => async (dispatch) => {
     dispatch(authActions.loginSuccess(response.data));
   } catch (error) {
     dispatch(authActions.loginError(error.message));
+    toast.error("Invalid email or password! Try again!");
+    return;
   }
 };
 
@@ -68,6 +82,13 @@ const logOut = () => async (dispatch) => {
     dispatch(authActions.logoutSuccess());
   } catch (error) {
     dispatch(authActions.logoutError(error.message));
+    if (error.response.status === 500) {
+      toast.error("Oops! Something wrong with server, please try later!!");
+      return;
+    } else {
+      toast.error("Something went wrong! Please reload the page!");
+      return;
+    }
   }
 };
 

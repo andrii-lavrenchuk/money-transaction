@@ -35,3 +35,16 @@
   color: rgb(230, 28, 28);
   padding-bottom: 20px;
 }
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-size: 17px;
+
+  color: #2a363b;
+}
+
+.link:hover {
+  color: #0dcaf0;
+}

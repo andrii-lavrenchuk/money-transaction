@@ -5,9 +5,9 @@ import { Formik, Form, Field } from "formik";
 import styles from "../Auth.module.scss";
 
 import { authOperations } from "../../../../redux/auth";
-import { Button, Spinner } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-const LoginView = ({ onLogin, isLoading }) => {
+const LoginView = ({ onLogin }) => {
   return (
     <Formik
       initialValues={{
@@ -18,7 +18,6 @@ const LoginView = ({ onLogin, isLoading }) => {
       onSubmit={(values) => {
         const email = values.email;
         const password = values.password;
-        console.log("submit");
         onLogin({ email, password });
       }}
       showPassowrd={false}
@@ -62,12 +61,8 @@ const LoginView = ({ onLogin, isLoading }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isLoading: state.auth.isLoading,
-});
-
 const mapDispatchToProps = {
   onLogin: authOperations.login,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
+export default connect(null, mapDispatchToProps)(LoginView);
