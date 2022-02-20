@@ -1,21 +1,9 @@
-const styles = {
-  container: {
-    minHeight: "calc(100vh - 50px)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: "center",
-  },
-};
+import styles from "./HomeView.module.scss";
 
 const HomeView = () => (
-  <div style={styles.container}>
-    <h1 style={styles.title}>
-      Money transaction app
+  <div className={styles.container}>
+    <h1 className={styles.title}>
+      Welcome to the money bank!
       <span role="img" aria-label="Иконка приветствия">
         💁‍♀️
       </span>

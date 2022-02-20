@@ -83,11 +83,11 @@ const UserTransactions = ({
       ) : (
         <div className="container">
           <div className="row">
-            <div className="col-lg-6">
-              <h2>User Transactions View</h2>
+            <div className="col-lg-6 pt-5">
+              <h2 className="pb-4">My transactions </h2>
               <h3>Your balance is {amount} $</h3>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 pt-5">
               <CustomTable />
             </div>
           </div>

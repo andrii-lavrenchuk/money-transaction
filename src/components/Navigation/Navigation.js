@@ -17,7 +17,7 @@ const Navigation = () => (
       className={styles.link}
       activeClassName={styles.activeLink}
     >
-      User Contacts
+      My Contacts
     </NavLink>
 
     <NavLink
@@ -26,7 +26,7 @@ const Navigation = () => (
       className={styles.link}
       activeClassName={styles.activeLink}
     >
-      User Transactions
+      My Transactions
     </NavLink>
 
     <NavLink

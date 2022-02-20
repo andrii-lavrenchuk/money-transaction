@@ -27,7 +27,7 @@ const UserContactsView = ({ currentUserId, contactsList }) => {
 
   return currentUserId ? (
     <>
-      <h2>User Contacts View</h2>
+      <h2 className="pt-5">My contacts</h2>
       <ContactsList visibleContacts={currentContacts} />
       {contactsList.length >= 5 && (
         <Pagination

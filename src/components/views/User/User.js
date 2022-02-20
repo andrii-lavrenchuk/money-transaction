@@ -28,7 +28,7 @@ const User = ({
   return isLoading ? (
     <Loader />
   ) : (
-    <div>
+    <div className="pt-5">
       {!currentUserId ? <CreateUserProfile /> : <UpdateUserProfile />}
 
       <Button className="mt-5" onClick={onLogout} color="danger" outline>

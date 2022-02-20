@@ -43,7 +43,7 @@ const AllUsersView = ({
         <Loader />
       ) : (
         <>
-          <h2>AllUsersView</h2>
+          <h2 className="pt-5">All users</h2>
           <div className="d-flex justify-content-center">
             <Col md={6} lg={3}>
               {allUsers.map((item) => (
