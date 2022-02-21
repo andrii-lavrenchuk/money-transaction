@@ -67,8 +67,8 @@ const mapDispatchToProps = {
 
 SendMoneyModal.propTypes = {
   currentuserid: PropTypes.string.isRequired,
-  userid: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  userid: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   onHide: PropTypes.func.isRequired,
 };
