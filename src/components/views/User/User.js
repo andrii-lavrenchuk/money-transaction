@@ -1,14 +1,16 @@
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
-import { authOperations } from "../../../redux/auth";
-import { usersOperations } from "../../../redux/users";
-
+// components
 import CreateUserProfile from "./CreateUserProfile";
 import UpdateUserProfile from "./UpdateUserProfile";
-
-import { Button } from "reactstrap";
 import Loader from "../../Loader";
+import { Button } from "reactstrap";
+
+// operations
+import { authOperations } from "../../../redux/auth";
+import { usersOperations } from "../../../redux/users";
 
 const User = ({
   onLogout,
@@ -50,4 +52,11 @@ const mapDispatchToProps = {
   getAddedContacts: usersOperations.getAddedContacts,
 };
 
+User.propTypes = {
+  onLogout: PropTypes.func,
+  currentUserId: PropTypes.string,
+  getCurrentUserProfile: PropTypes.func,
+  getAddedContacts: PropTypes.func,
+  isLoading: PropTypes.bool,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(User);

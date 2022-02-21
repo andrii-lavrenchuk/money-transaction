@@ -1,9 +1,15 @@
 import { connect } from "react-redux";
-import { authOperations } from "../../../../redux/auth";
-import FormSchema from "../../../../helpers/formSchema";
 import { Formik, Form, Field } from "formik";
-import styles from "../Auth.module.scss";
+import PropTypes from "prop-types";
+// helpers
+import FormSchema from "../../../../helpers/formSchema";
+// components
 import { Button } from "react-bootstrap";
+
+// operations
+import { authOperations } from "../../../../redux/auth";
+// styles
+import styles from "../Auth.module.scss";
 
 const RegisterView = ({ onRegister }) => {
   return (
@@ -64,4 +70,7 @@ const mapDispatchToProps = {
   onRegister: authOperations.register,
 };
 
+RegisterView.propTypes = {
+  onRegister: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(RegisterView);

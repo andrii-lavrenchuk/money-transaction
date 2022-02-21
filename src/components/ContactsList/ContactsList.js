@@ -1,12 +1,15 @@
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
+import PropTypes from "prop-types";
 
+// components
 import Loader from "../Loader";
 import Contact from "../Contact";
-
 import { Button, Col } from "react-bootstrap";
+
+// operations
 import { usersOperations } from "../../redux/users";
-import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
 const ContactsList = ({
   contactsList,
@@ -70,6 +73,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getContactsList: usersOperations.getContactsList,
   onDeleteContact: usersOperations.deleteContact,
+};
+
+ContactsList.propTypes = {
+  contactsList: PropTypes.arrayOf(PropTypes.object.isRequired),
+  getContactsList: PropTypes.func.isRequired,
+  addedContact: PropTypes.arrayOf(PropTypes.string.isRequired),
+  isLoading: PropTypes.bool,
+  onDeleteContact: PropTypes.func,
+  visibleContacts: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);

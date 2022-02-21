@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { usersOperations } from "../../../../redux/users";
+import PropTypes from "prop-types";
+
+// components
 import { Form, FormGroup, Input, Label, Button, Row, Col } from "reactstrap";
+
+// operations
+import { usersOperations } from "../../../../redux/users";
 
 const CreateUserProfile = ({ onCreateProfile, email, profileUserId }) => {
   const [firstName, setFirstName] = useState("");
@@ -70,6 +75,12 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   onCreateProfile: usersOperations.createProfile,
+};
+
+CreateUserProfile.propTypes = {
+  onCreateProfile: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  profileUserId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUserProfile);

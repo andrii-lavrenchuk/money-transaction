@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { useParams, useHistory, useLocation } from "react-router-dom";
-import { Form, Col, Button, Card } from "react-bootstrap";
+import PropTypes from "prop-types";
 
+// components
+import { Form, Col, Button, Card } from "react-bootstrap";
 import SendMoneyModal from "../../SendMoneyModal";
 import Loader from "../../Loader";
 
@@ -81,5 +83,10 @@ const mapStateToProps = (state) => ({
   contactsList: state.users.contactsList,
   isLoading: state.transactions.isLoading,
 });
+
+ContactProfileView.propTypes = {
+  contactsList: PropTypes.arrayOf(PropTypes.object.isRequired),
+  isLoading: PropTypes.bool,
+};
 
 export default connect(mapStateToProps, null)(ContactProfileView);

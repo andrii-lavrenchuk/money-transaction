@@ -1,12 +1,15 @@
 import { connect } from "react-redux";
-import { authSelectors } from "../../redux/auth";
+import { NavLink } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import PropTypes from "prop-types";
 
+// components
 import Navigation from "../Navigation/";
 import AuthNav from "../AuthNav";
 import logoImg from "../../images/svg/money-logo.svg";
 
-import { NavLink } from "react-router-dom";
-import { Navbar, Container, Nav } from "react-bootstrap";
+//selectors
+import { authSelectors } from "../../redux/auth";
 
 const AppBar = ({ isAuthenticated }) => (
   <Navbar collapseOnSelect expand="lg" bg="secondary" variant="light">
@@ -33,5 +36,9 @@ const AppBar = ({ isAuthenticated }) => (
 const mapStateToProps = (state) => ({
   isAuthenticated: authSelectors.getIsAuthenticated(state),
 });
+
+AppBar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
 export default connect(mapStateToProps, null)(AppBar);

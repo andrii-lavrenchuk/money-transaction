@@ -1,11 +1,18 @@
 import { connect } from "react-redux";
-import FormSchema from "../../../../helpers/formSchema";
 import { Formik, Form, Field } from "formik";
+import PropTypes from "prop-types";
 
-import styles from "../Auth.module.scss";
-
-import { authOperations } from "../../../../redux/auth";
+// components
 import { Button } from "react-bootstrap";
+
+// helpers
+import FormSchema from "../../../../helpers/formSchema";
+
+// operations
+import { authOperations } from "../../../../redux/auth";
+
+// styles
+import styles from "../Auth.module.scss";
 
 const LoginView = ({ onLogin }) => {
   return (
@@ -63,6 +70,10 @@ const LoginView = ({ onLogin }) => {
 
 const mapDispatchToProps = {
   onLogin: authOperations.login,
+};
+
+LoginView.propTypes = {
+  onLogin: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(LoginView);

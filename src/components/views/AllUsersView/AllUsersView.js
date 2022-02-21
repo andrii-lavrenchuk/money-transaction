@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Button, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { usersOperations } from "../../../redux/users";
+import PropTypes from "prop-types";
 
+// components
 import Contact from "../../Contact";
 import Loader from "../../Loader";
 import Pagination from "../../Pagination";
+import { Button, Col } from "react-bootstrap";
+
+// operations
+import { usersOperations } from "../../../redux/users";
 
 const AllUsersView = ({
   allUsers,
@@ -17,7 +21,7 @@ const AllUsersView = ({
   const [contactsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const visibleContacts = allUsers.map((item) => item);
+  const visibleContacts = [...allUsers];
 
   const indexOfLastContact = currentPage * contactsPerPage;
   const indexOfFirstContact = indexOfLastContact - contactsPerPage;
@@ -88,4 +92,11 @@ const mapDispatchToProps = {
   addContact: usersOperations.addContact,
 };
 
+AllUsersView.propTypes = {
+  allUsers: PropTypes.arrayOf(PropTypes.object.isRequired),
+  addContact: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
+  addedContacts: PropTypes.arrayOf(PropTypes.string.isRequired),
+  isLoading: PropTypes.bool,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(AllUsersView);

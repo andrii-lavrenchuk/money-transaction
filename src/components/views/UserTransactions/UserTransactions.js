@@ -1,15 +1,17 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import { connect } from "react-redux";
-
+// components
 import Loader from "../../Loader";
 import CustomTable from "../../Table";
 
+// operations
 import {
   transactionsOperations,
   transactionsActions,
 } from "../../../redux/transactions";
-import { useDispatch } from "react-redux";
 
 const UserTransactions = ({
   amount,
@@ -148,6 +150,15 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getAllTransactions: transactionsOperations.getAllTransaction,
+};
+
+UserTransactions.propTypes = {
+  amount: PropTypes.number.isRequired,
+  getAllTransactions: PropTypes.func.isRequired,
+  allTransactions: PropTypes.arrayOf(PropTypes.object.isRequired),
+  currentUserId: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool,
+  allProfiles: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserTransactions);

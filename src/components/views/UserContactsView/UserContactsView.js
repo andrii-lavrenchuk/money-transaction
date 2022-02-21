@@ -1,7 +1,9 @@
 import { connect } from "react-redux";
 import { useState } from "react";
-import Pagination from "../../Pagination";
+import PropTypes from "prop-types";
 
+// components
+import Pagination from "../../Pagination";
 import ContactsList from "../../ContactsList";
 
 const UserContactsView = ({ currentUserId, contactsList }) => {
@@ -9,8 +11,6 @@ const UserContactsView = ({ currentUserId, contactsList }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const visibleContacts = contactsList.map((item) => item);
-
-  // Get current contacts
 
   const indexOfLastContact = currentPage * contactsPerPage;
   const indexOfFirstContact = indexOfLastContact - contactsPerPage;
@@ -46,5 +46,10 @@ const mapStateToProps = (state) => ({
 
   contactsList: state.users.contactsList,
 });
+
+UserContactsView.propTypes = {
+  currentUserId: PropTypes.string.isRequired,
+  contactsList: PropTypes.arrayOf(PropTypes.object.isRequired),
+};
 
 export default connect(mapStateToProps, null)(UserContactsView);

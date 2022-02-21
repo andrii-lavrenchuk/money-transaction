@@ -1,4 +1,7 @@
-import errorImg from "./images/notFound.gif";
+// images
+import errorImg from "../../../images/notFound.gif";
+
+// styles
 import s from "./NotFoundView.module.scss";
 
 const NotFoundView = () => {

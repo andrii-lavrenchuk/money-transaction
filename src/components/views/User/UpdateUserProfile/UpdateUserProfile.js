@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import PropTypes from "prop-types";
+
+// components
+import Loader from "../../../Loader";
 import { Form, FormGroup, Input, Label, Button, Row, Col } from "reactstrap";
 
+// operations
 import { usersOperations } from "../../../../redux/users";
-import Loader from "../../../Loader";
-import { toast } from "react-toastify";
 
 const UpdateUserProfile = ({
   firstName,
@@ -118,6 +122,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onUpdateProfile: usersOperations.updateProfile,
+};
+
+UpdateUserProfile.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  email: PropTypes.string,
+  onUpdateProfile: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserProfile);

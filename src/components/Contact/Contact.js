@@ -1,4 +1,5 @@
 import { Card } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const Contact = ({ firstName, lastName }) => {
   return (
@@ -11,6 +12,11 @@ const Contact = ({ firstName, lastName }) => {
       </Card>
     </>
   );
+};
+
+Contact.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
 };
 
 export default Contact;

@@ -1,4 +1,5 @@
 import { Table } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const CustomTable = ({ transactions }) => {
   return (
@@ -21,6 +22,10 @@ const CustomTable = ({ transactions }) => {
       </tbody>
     </Table>
   );
+};
+
+CustomTable.propTypes = {
+  transactions: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
 export default CustomTable;

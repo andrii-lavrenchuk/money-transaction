@@ -1,4 +1,5 @@
 import ReactPaginate from "react-paginate";
+import PropTypes from "prop-types";
 
 const Pagination = ({ contentLength, handlePageClick }) => {
   return (
@@ -20,6 +21,11 @@ const Pagination = ({ contentLength, handlePageClick }) => {
       activeClassName={"active"}
     />
   );
+};
+
+Pagination.propTypes = {
+  contentLength: PropTypes.number.isRequired,
+  handlePageClick: PropTypes.func,
 };
 
 export default Pagination;

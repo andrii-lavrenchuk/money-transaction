@@ -1,5 +1,6 @@
-import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+
+// styles
 import styles from "./Navigation.module.scss";
 
 const Navigation = () => (

@@ -1,9 +1,10 @@
 import { Modal, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-
-import { transactionsOperations } from "../../redux/transactions";
-
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+// operations
+import { transactionsOperations } from "../../redux/transactions";
 
 const SendMoneyModal = (props) => {
   const { currentuserid, userid, value, children, onHide } = props;
@@ -62,6 +63,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   send: transactionsOperations.makeTransaction,
+};
+
+SendMoneyModal.propTypes = {
+  currentuserid: PropTypes.string.isRequired,
+  userid: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
+  onHide: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendMoneyModal);
