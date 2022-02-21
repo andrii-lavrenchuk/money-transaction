@@ -24,7 +24,7 @@ const ContactsList = ({
 
   useEffect(() => {
     getContactsList();
-  }, [addedContact]);
+  }, [addedContact, getContactsList]);
 
   return isLoading ? (
     <Loader />

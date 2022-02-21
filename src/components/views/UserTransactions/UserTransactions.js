@@ -55,6 +55,7 @@ const UserTransactions = ({
   const allUserTransactions = allTransactions.filter(
     (item) => item.from === currentUserId
   );
+
   const allTransactionsToUser = allTransactions.filter(
     (item) => item.to === currentUserId
   );
@@ -63,6 +64,7 @@ const UserTransactions = ({
     return {
       to: item.to,
       amount: item.amount,
+      date: item.created_at,
     };
   });
 
@@ -70,6 +72,7 @@ const UserTransactions = ({
     return {
       from: item.from,
       amount: item.amount,
+      date: item.created_at,
     };
   });
 
@@ -87,6 +90,7 @@ const UserTransactions = ({
             from: "Me",
             to: `${allProfiles[j].firstName} ${allProfiles[j].lastName}`,
             amount: allTransactions[i].amount,
+            date: allTransactions[i].date.slice(0, 10),
           };
 
           arrOfUserTransactions.push(transaction);
@@ -106,6 +110,7 @@ const UserTransactions = ({
             to: "Me",
             from: `${allProfiles[j].firstName} ${allProfiles[j].lastName}`,
             amount: allTransactions[i].amount,
+            date: allTransactions[i].date.slice(0, 10),
           };
 
           arrOfToUserTransactions.push(transaction);
@@ -129,6 +134,7 @@ const UserTransactions = ({
               <h3>Your balance is {amount} $</h3>
             </div>
             <div className="col-lg-6 pt-5">
+              <h2 className="pb-5">Transactions history</h2>
               <CustomTable transactions={arrOfUserTransactions} />
 
               <CustomTable transactions={arrOfToUserTransactions} />

@@ -9,6 +9,7 @@ const CustomTable = ({ transactions }) => {
           <th>From</th>
           <th>To</th>
           <th>Amount</th>
+          <th>Date</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@ const CustomTable = ({ transactions }) => {
             <td>{item.from}</td>
             <td>{item.to}</td>
             <td>{item.amount}</td>
+            <td>{item.date}</td>
           </tr>
         ))}
       </tbody>
