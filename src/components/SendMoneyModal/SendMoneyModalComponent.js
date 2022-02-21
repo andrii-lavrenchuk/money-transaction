@@ -71,6 +71,7 @@ SendMoneyModal.propTypes = {
   value: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   onHide: PropTypes.func.isRequired,
+  send: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendMoneyModal);

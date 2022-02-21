@@ -42,7 +42,11 @@ const UpdateUserProfile = ({
       return;
     }
 
-    if (newFirstName.trim() === firstName && newLastName.trim() === lastName) {
+    if (
+      newFirstName.trim() === firstName &&
+      newLastName.trim() === lastName &&
+      newEmail.trim() === email
+    ) {
       toast.error("You cannot use the same values for updating!");
       return;
     }
