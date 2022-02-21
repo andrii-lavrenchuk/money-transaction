@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
 // components
 import Contact from "../../Contact";
@@ -40,6 +41,14 @@ const AllUsersView = ({
     setCurrentPage(data.selected + 1);
   };
 
+  const addToContacts = (item) => {
+    if (item.user === userId) {
+      toast.error("You cannot add yourself to the contacts list!");
+      return;
+    }
+    addContact({ owner: userId, contact: item.user });
+  };
+
   return (
     <>
       {isLoading ? (
@@ -57,9 +66,7 @@ const AllUsersView = ({
                   />
 
                   <Button
-                    onClick={() =>
-                      addContact({ owner: userId, contact: item.user })
-                    }
+                    onClick={() => addToContacts(item)}
                     variant="info"
                     disabled={disablingButton(item.user)}
                   >
