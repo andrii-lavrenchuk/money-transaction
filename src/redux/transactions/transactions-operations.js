@@ -18,7 +18,6 @@ const getAllTransaction = () => async (dispatch) => {
     });
 
     dispatch(transactionsActions.getAllTransactionSuccess(response.data));
-    console.log("getAllTransactionSuccess");
   } catch (error) {
     dispatch(transactionsActions.getAllTransactionError(error));
   }

@@ -14,6 +14,7 @@ import PublicRoute from "./components/PublicRoute";
 // operations
 
 import { authOperations } from "./redux/auth";
+import { usersOperations } from "./redux/users";
 
 // styles
 import "react-toastify/dist/ReactToastify.css";
@@ -79,10 +80,14 @@ const AllUsersView = lazy(
     ) /* webpackChunkName: "users-view" */
 );
 
-const App = ({ onGetCurrentUser, isLoading }) => {
+const App = ({ onGetCurrentUser, isLoading, getAllUsers }) => {
   useEffect(() => {
     onGetCurrentUser();
   }, [onGetCurrentUser]);
+
+  useEffect(() => {
+    getAllUsers();
+  }, [getAllUsers]);
 
   return isLoading ? (
     <Loader />
@@ -137,6 +142,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
+  getAllUsers: usersOperations.getAllProfiles,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

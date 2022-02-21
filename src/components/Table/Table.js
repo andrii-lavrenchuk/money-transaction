@@ -1,23 +1,23 @@
 import { Table } from "react-bootstrap";
 
-const CustomTable = ({ fromMe }) => {
+const CustomTable = ({ transactions }) => {
   return (
     <Table striped bordered hover variant="info">
       <thead>
         <tr>
-          <th>From me</th>
-          <th>To me</th>
+          <th>From</th>
+          <th>To</th>
           <th>Amount</th>
         </tr>
       </thead>
       <tbody>
-        {/* {fromMe.map((item) => (
-          <tr key={item.from}>
-            <td>Me</td>
-            <td>to</td>
+        {transactions.map((item, index) => (
+          <tr key={index}>
+            <td>{item.from}</td>
+            <td>{item.to}</td>
             <td>{item.amount}</td>
           </tr>
-        ))} */}
+        ))}
       </tbody>
     </Table>
   );

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { Button, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { usersOperations } from "../../../redux/users";
@@ -8,33 +8,32 @@ import Loader from "../../Loader";
 import Pagination from "../../Pagination";
 
 const AllUsersView = ({
-  getAllUsers,
   allUsers,
   addContact,
   userId,
   addedContacts,
   isLoading,
-  contentLength,
 }) => {
-  useEffect(() => {
-    getAllUsers(0, 4);
-  }, [getAllUsers]);
+  const [contactsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const perPage = 5;
-  let alContentLength = Number(Math.ceil(contentLength.slice(-3)));
-  let paginationLength = 0;
-  paginationLength = Math.ceil(alContentLength / perPage);
+  const visibleContacts = allUsers.map((item) => item);
+
+  const indexOfLastContact = currentPage * contactsPerPage;
+  const indexOfFirstContact = indexOfLastContact - contactsPerPage;
+  const currentContacts = visibleContacts.slice(
+    indexOfFirstContact,
+    indexOfLastContact
+  );
+
+  const paginationLength = Math.ceil(allUsers.length / contactsPerPage);
 
   const disablingButton = (id) => {
     return addedContacts.includes(id);
   };
 
-  const handlePageClick = async (data) => {
-    let page = data.selected + 1;
-    const from = (page - 1) * perPage;
-    const to = (page - 1) * perPage + perPage - 1;
-
-    await getAllUsers(from, to);
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected + 1);
   };
 
   return (
@@ -46,7 +45,7 @@ const AllUsersView = ({
           <h2 className="pt-5">All users</h2>
           <div className="d-flex justify-content-center">
             <Col md={6} lg={3}>
-              {allUsers.map((item) => (
+              {currentContacts.map((item) => (
                 <div key={item.id}>
                   <Contact
                     firstName={item.firstName}
@@ -72,7 +71,7 @@ const AllUsersView = ({
       <Pagination
         contentLength={paginationLength}
         handlePageClick={handlePageClick}
-        perPage={perPage}
+        perPage={5}
       />
     </>
   );
@@ -83,11 +82,9 @@ const mapStateToProps = (state) => ({
   userId: state.auth.id,
   addedContacts: state.users.addedContact,
   isLoading: state.users.isLoading,
-  contentLength: state.users.allProfiles.contentLength,
 });
 
 const mapDispatchToProps = {
-  getAllUsers: usersOperations.getAllProfiles,
   addContact: usersOperations.addContact,
 };
 
