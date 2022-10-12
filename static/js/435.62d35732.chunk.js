@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmoney_transaction=self.webpackChunkmoney_transaction||[]).push([[435],{8435:function(e,n,a){a.r(n),a.d(n,{default:function(){return l}});var i="HomeView_container__1Pf4S",t="HomeView_title__lu9j9",c=a(3329),l=function(){return(0,c.jsx)("div",{className:i,children:(0,c.jsxs)("h1",{className:t,children:["Welcome to the money bank!",(0,c.jsx)("span",{role:"img","aria-label":"hello icon",children:"\ud83d\udc81\u200d\u2640\ufe0f"})]})})}}}]);
+//# sourceMappingURL=435.62d35732.chunk.js.map
